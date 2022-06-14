@@ -1,32 +1,32 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Home.scss'
 import MovieListing from '../MovieListing/MovieListing'
 import movieApi from '../../common/apis/movieApi'
 import { api_key } from '../../common/apis/MovieApiKey'
 
 function Home() {
-
-  // console.log(movieApi.get())
+  const [cast, setCast] = useState([])
 
   useEffect(() => {
     const fetchMovies = async () => {
-      const response = await movieApi.get(`3/movie/550?api_key=${api_key}&language=en-US&page=1`)
+      const response = await movieApi.get(`http://api.themoviedb.org/3/movie/297762/casts?api_key=${api_key}`)
       .catch(err => console.log(err))
       console.log('res: ', response)
+    
+      setCast(response.data.cast)
     }
     fetchMovies()
-    // fetch(`
-    // https://api.themoviedb.org/3/movie/550?api_key=434100939988b6276d424c1350b0fdfc&language=en-US`, {
-    //   method: 'GET'
-    // })
-    // .then(res => res.json())
-    // .then(data => console.log(data))
   }, [])
-
+  console.log('cast: ',cast)
   return (
     <div className="home">
       <div className="home__banner"></div>
-      <MovieListing />
+      {cast.map(actor => (
+        <div className="actorCard" key={actor.id}>
+          <span>{actor.name}</span>
+          <img width='50' src={`https://image.tmdb.org/t/p/original/${actor.profile_path}`} />
+        </div>
+      ))}
     </div>
   )
 }
