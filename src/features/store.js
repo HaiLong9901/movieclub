@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import todoListReducer from '../features/Todolist/TodoListSlice'
+import moviesReducer from './movies/moviesSlice'
 
 export default configureStore({
     reducer: {
-        TodoList: todoListReducer
+        movies: moviesReducer
     }
 })
