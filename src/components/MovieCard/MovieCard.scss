@@ -1,0 +1,39 @@
+@import '../../common/colors.scss';
+
+.movieCard {
+    position: relative;
+    cursor: pointer;
+    transition: .2s all ease-in-out;
+
+    &:hover{
+        transform: scale(1.05);
+    }
+
+    &__top{
+        width: 100%;
+
+        img{
+            width: 100%;
+            object-fit: cover;
+            border-radius: .5rem;
+        }
+    }
+
+    &__bottom{
+        position: absolute;
+        bottom: 1rem;
+        display: block;
+        padding-left: .5rem;
+
+        h4{
+            font-size: 1rem;
+            color: $white-cl;
+            margin: .5rem 0;
+        }
+        span{
+            font-size: .9rem;
+            color: $white-cl;
+            font-weight: 400;
+        }
+    }
+}

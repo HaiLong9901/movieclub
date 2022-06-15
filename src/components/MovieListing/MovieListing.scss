@@ -1,5 +1,7 @@
 @import '../../common//colors.scss';
 
 .movieListing{
-    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    grid-gap: 1.5rem;
 }
