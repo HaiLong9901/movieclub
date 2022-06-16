@@ -7,9 +7,15 @@ export const fetchAsyncMovies = createAsyncThunk('movies/fetchAsyncMovies', asyn
 
     return response.data.results
 })
+export const fetchAsyncDetailMovie = createAsyncThunk('movies/fetchAsyncDetailMovie', async (movieId) => {
+    const response = await movieApi.get(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${api_key}&append_to_response=videos`)
+    console.log(response.data)
+    return response.data
+})
 
 const initialState = {
-    movies: []
+    movies: [],
+    detailMovie: {}
 }
 
 const moviesSlice = createSlice({
@@ -25,11 +31,22 @@ const moviesSlice = createSlice({
             console.log('pending')
         },
         [fetchAsyncMovies.fulfilled]: (state, {payload}) => {
-            console.log('successfully!!!')
+            console.log('successfully!!!', payload)
 
             return {...state, movies: payload}
         },
         [fetchAsyncMovies.rejected]: () => {
+            console.log('rejected')
+        },
+        [fetchAsyncDetailMovie.pending]: () => {
+            console.log('pending')
+        },
+        [fetchAsyncDetailMovie.fulfilled]: (state, {payload}) => {
+            console.log('successfully!!!')
+
+            return {...state, detailMovie: payload}
+        },
+        [fetchAsyncDetailMovie.rejected]: () => {
             console.log('rejected')
         }
     }
@@ -38,5 +55,6 @@ const moviesSlice = createSlice({
 export const { addMovie } = moviesSlice.actions
 
 export const getAllMovies = state => state.movies.movies
+export const getDetailMovie = state => state.movies.detailMovie
 
 export default moviesSlice.reducer

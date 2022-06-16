@@ -5,6 +5,8 @@ import movieApi from '../../common/apis/movieApi'
 import { api_key } from '../../common/apis/MovieApiKey'
 import { getAllMovies } from '../../features/movies/moviesSlice'
 import MovieCard from '../MovieCard/MovieCard'
+import Slider from 'react-slick'
+import { setting } from '../../common/setting'
 
 function MovieListing() {
 
@@ -18,7 +20,10 @@ function MovieListing() {
 
   return (
     <div className="movieListing">
-      {renderMovies}
+      <Slider {...setting}>
+        {renderMovies}
+      </Slider>
+      
     </div>
   )
 }

@@ -4,8 +4,9 @@
     position: relative;
     cursor: pointer;
     transition: .2s all ease-in-out;
+    margin-right: 1rem;
 
-    &:hover{
+    &:hover {
         transform: scale(1.05);
     }
 
