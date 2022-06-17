@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import './MovieListing.scss'
-import movieApi from '../../common/apis/movieApi'
-import { api_key } from '../../common/apis/MovieApiKey'
 import { getAllMovies } from '../../features/movies/moviesSlice'
 import MovieCard from '../MovieCard/MovieCard'
 import Slider from 'react-slick'

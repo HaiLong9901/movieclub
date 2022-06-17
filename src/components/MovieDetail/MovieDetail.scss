@@ -1,16 +1,51 @@
 @import '../../common/colors.scss';
 
 .movieDetail{
-    width: 100%;
-    padding: 2rem 5rem;
-    display: flex;
-    gap: 3rem;
+    background-size: cover !important;
+    backdrop-filter: blur(2rem) !important;
+    // filter: blur(.8rem);
+    // width: 100%;
+    // position: relative;
 
-    .movieDetail__left{
-        width: 20%;
+    // .movieDetail__background{
+    //     position: absolute;
+    //     width: 100%;
 
-        img{
-            width: 100%;
+    //     img{
+    //         width: 100%;
+    //         opacity: 0.6;
+    //     }
+    // }
+
+    .movieDetail__container{
+        backdrop-filter: blur(.6rem);
+        padding: 2rem 5rem;
+        display: flex;
+        gap: 3rem;
+        .movieDetail__left{
+            width: 20%;
+            box-shadow: $shadow;
+
+            img{
+                width: 100%;
+                border-radius: .5rem;
+                box-shadow: $shadow;
+            }
+
+        }
+        .movieDetail__right{
+            width: 70%;
+            .movieDetail__description{
+                width: 100%;
+    
+                &__title{
+                    color: $white-cl;
+                    display: block;
+                    margin: 0;
+                    text-align: center;
+                    font-size: 2rem;
+                }
+            }
         }
     }
 }
