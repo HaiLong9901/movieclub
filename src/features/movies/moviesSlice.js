@@ -8,9 +8,14 @@ export const fetchAsyncMovies = createAsyncThunk('movies/fetchAsyncMovies', asyn
     return response.data.results
 })
 export const fetchAsyncDetailMovie = createAsyncThunk('movies/fetchAsyncDetailMovie', async (movieId) => {
-    const response = await movieApi.get(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${api_key}&append_to_response=videos`)
-    console.log(response.data)
-    return response.data
+    if(movieId) {
+       const response = await movieApi.get(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${api_key}&append_to_response=videos`)
+       console.log(response.data)
+       return response.data 
+    }
+
+    return {}
+    
 })
 
 const initialState = {

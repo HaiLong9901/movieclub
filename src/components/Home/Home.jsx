@@ -9,7 +9,7 @@ function Home() {
 
   useEffect(() => {
     dispatch(fetchAsyncMovies())
-    dispatch(fetchAsyncDetailMovie(297762))
+    // dispatch(fetchAsyncDetailMovie())
   }, [dispatch])
 
   return (

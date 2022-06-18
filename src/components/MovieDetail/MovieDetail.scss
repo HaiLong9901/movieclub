@@ -3,6 +3,12 @@
 .movieDetail{
     background-size: cover !important;
     backdrop-filter: blur(2rem) !important;
+    span{
+        color: #fff;
+    }
+    p{
+        color: #fff;
+    }
     // filter: blur(.8rem);
     // width: 100%;
     // position: relative;
@@ -22,9 +28,11 @@
         padding: 2rem 5rem;
         display: flex;
         gap: 3rem;
+        background: transparent;
         .movieDetail__left{
             width: 20%;
-            box-shadow: $shadow;
+            // box-shadow: $shadow;
+            background-color: transparent;
 
             img{
                 width: 100%;
@@ -44,6 +52,20 @@
                     margin: 0;
                     text-align: center;
                     font-size: 2rem;
+                }
+
+                &__rate{
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
+                }
+
+                &__infor{
+                    display: flex;
+                    flex-direction: column;
+                }
+                &__button{
+                    background: $blue-cl;
                 }
             }
         }
