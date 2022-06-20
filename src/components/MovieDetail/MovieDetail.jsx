@@ -2,11 +2,12 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchAsyncActors, fetchAsyncDetailMovie, getActors, getDetailMovie } from '../../features/movies/moviesSlice'
 import { useParams } from 'react-router-dom'
-import { AiFillStar, AiFillEye } from 'react-icons/ai'
+import { AiFillStar, AiFillEye, AiOutlineYoutube } from 'react-icons/ai'
 import { Button } from '@mui/material'
 import Slider from 'react-slick'
 import { setting } from '../../common/setting'
 import './MovieDetail.scss'
+import unkownActor from '../../images/unknown.jfif'
 
 function MovieDetail() {
   const param = useParams()
@@ -46,16 +47,16 @@ function MovieDetail() {
                 <p className='overview'>{data.overview}</p>
               </div>
             </div>
-            <Button variant='contained' startIcon={<AiFillEye />} className='movieDetail__description__button'>Trailer</Button>
+            <Button variant='contained' startIcon={<AiOutlineYoutube />} className='movieDetail__description__button'>Trailer</Button>
           </div>
         </div>
-
+        <div className='movieDetail__sector'><h3>Casts</h3></div>
         <div className="movieDetail__actors">
           <Slider { ...setting }>
             {actors?actors.map(actor => (
               <div className="movieDetail__actors__card" key={actor.id}>
                 <div className="movieDetail__actors__card__img">
-                  <img src={`https://image.tmdb.org/t/p/original/${actor.profile_path}`} alt={actor.original_name} />
+                  <img src={actor.profile_path?`https://image.tmdb.org/t/p/original/${actor.profile_path}`:unkownActor} alt={actor.original_name} />
                 </div>
                 <div className="movieDetail__actors__card__infor">
                   <h5>{actor.original_name}</h5>
@@ -64,6 +65,12 @@ function MovieDetail() {
               </div>
             )):''}
           </Slider>
+        </div>
+        <div className='movieDetail__sector'><h3>Reviews</h3></div>
+        <div className="movieDetail__reviews">
+          <div className="movieDetail__reviews__card">
+            
+          </div>
         </div>
       </div>
       
