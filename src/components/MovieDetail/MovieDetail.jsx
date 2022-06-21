@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchAsyncActors, fetchAsyncDetailMovie, fetchAsyncReviews, getActors, getDetailMovie, getReviews } from '../../features/movies/moviesSlice'
+import { fetchAsyncActors, fetchAsyncDetailMovie, fetchAsyncReviews, fetchAsyncSimilarMovies, getActors, getDetailMovie, getReviews, getSimilarMovies } from '../../features/movies/moviesSlice'
 import { useParams } from 'react-router-dom'
 import { AiFillStar, AiFillEye, AiOutlineYoutube } from 'react-icons/ai'
 import { FaQuoteRight } from 'react-icons/fa'
 import { Button, Avatar } from '@mui/material'
 import Slider from 'react-slick'
+import Title from '../Title/Title'
 import { setting } from '../../common/setting'
+import { settingForReview } from '../../common/settingForReview'
 import './MovieDetail.scss'
 import unkownActor from '../../images/unknown.jfif'
 
@@ -18,13 +20,20 @@ function MovieDetail() {
    dispatch(fetchAsyncDetailMovie(movieId))
    dispatch(fetchAsyncActors(movieId))
    dispatch(fetchAsyncReviews(movieId))
+   dispatch(fetchAsyncSimilarMovies(movieId))
   }, [dispatch,movieId])
 
   //  const data = useSelector(state => state.movies.detailMovie)
   const data = useSelector(getDetailMovie)
   const actors = useSelector(getActors).cast
   const reviews = useSelector(getReviews).results
-  console.log(reviews)
+  const similarMovies = useSelector(getSimilarMovies).results
+
+
+  const parseDate = (date) => {
+    const time = new Date(Date.parse(date)).toUTCString()
+    return time
+  }
   return (
     <div className="movieDetail" style={{
       background: `url("https://image.tmdb.org/t/p/w500/${data.backdrop_path}") no-repeat fixed center`,
@@ -53,7 +62,8 @@ function MovieDetail() {
             <Button variant='contained' startIcon={<AiOutlineYoutube />} className='movieDetail__description__button'>Trailer</Button>
           </div>
         </div>
-        <div className='movieDetail__sector'><h3>Casts</h3></div>
+        {/* <div className='movieDetail__sector'><h3>Casts</h3></div> */}
+        <Title>Casts</Title>
         <div className="movieDetail__actors">
           <Slider { ...setting }>
             {actors?actors.map(actor => (
@@ -69,29 +79,30 @@ function MovieDetail() {
             )):''}
           </Slider>
         </div>
-        <div className='movieDetail__sector'><h3>Reviews</h3></div>
+        <Title>Reviews</Title>
         <div className="movieDetail__reviews">
-          <Slider {...setting}>
+          <Slider {...settingForReview}>
               {reviews?reviews.map(review => (
                 <div className="movieDetail__reviews__card">
                 <div className="movieDetail__reviews__card__header">
                   <div className="movieDetail__reviews__card__header__img">
-                    <Avatar src={review.author_details.avatar_path?review.author_details.avatar_path.substring(1):''} sx={{
-                      width: '80%',
-                      height: '80%'
-                    }} />
+                    <Avatar src={review.author_details.avatar_path?review.author_details.avatar_path.substring(1):''} />
                   </div>
                   <h3 className='movieDetail__reviews__card__header__name'>{review.author_details.username}</h3>
                   <FaQuoteRight className='movieDetail__reviews__card__header__quote'/>
                 </div>
+                <div className="movieDetail__reviews__card__infor">
+                  <p>Created at: {review.created_at?parseDate(review.created_at):''}</p>
+                  <span>Rate: {review.author_details.rating} <AiFillStar className='movieDetail__reviews__card__infor__star'/></span>
+                </div>
                 <div className="movieDetail__reviews__card__content">
-                  <p>{review.content||''}</p>
+                  <p>{review.content?review.content.substring(0,100).concat(' . . .'):''}</p>
                 </div>
               </div>
               )):''}
           </Slider>
-          
         </div>
+        <Title>Similar movies</Title>
       </div>
       
     </div>

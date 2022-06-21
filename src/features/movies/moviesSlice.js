@@ -34,11 +34,20 @@ export const fetchAsyncReviews = createAsyncThunk('movies/fetchAsyncReviews', as
     }
 })
 
+export const fetchAsyncSimilarMovies = createAsyncThunk('movies/fetchAsyncSimilarMovies', async (movieId) => {
+    if(movieId) {
+        const response = await movieApi.get(`3/movie/${movieId}/similar?api_key=${api_key}`)
+        console.log('similar: ', response.data)
+        return response.data
+    }
+})
+
 const initialState = {
     movies: [],
     detailMovie: {},
     actors: [],
-    reviews: []
+    reviews: [],
+    similar: []
 }
 
 const moviesSlice = createSlice({
@@ -93,6 +102,17 @@ const moviesSlice = createSlice({
         },
         [fetchAsyncReviews.rejected]: () => {
             console.log('rejected')
+        },
+        [fetchAsyncSimilarMovies.pending]: () => {
+            console.log('pending')
+        },
+        [fetchAsyncSimilarMovies.fulfilled]: (state, {payload}) => {
+            console.log('successfully!!!')
+
+            return {...state, similar: payload }
+        },
+        [fetchAsyncSimilarMovies.rejected]: () => {
+            console.log('rejected')
         }
     }
 })
@@ -103,5 +123,6 @@ export const getAllMovies = state => state.movies.movies
 export const getDetailMovie = state => state.movies.detailMovie
 export const getActors = state => state.movies.actors
 export const getReviews = state => state.movies.reviews
+export const getSimilarMovies = state => state.movies.similar
 
 export default moviesSlice.reducer

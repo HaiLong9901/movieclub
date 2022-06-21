@@ -3,4 +3,6 @@
 .app{
     background: $blue-cl;
     position: relative;
+    box-sizing: border-box;
+    overflow: hidden;
 }
