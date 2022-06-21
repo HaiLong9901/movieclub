@@ -120,4 +120,60 @@
             }
         }
     }
+
+    &__reviews{
+        width: 100%;
+        padding: 0 5rem;
+        margin-top: 2rem;
+
+        &__card{
+            width: 20%;
+            background: $purple-cl;
+            aspect-ratio: 1/0.8;
+            border-radius: .5rem;
+            padding: .5rem 1rem;
+
+            &__header{
+                width: 100%;
+                display: flex;
+                position: relative;
+                gap: .5rem;
+
+                &__img{
+                    width: 20%;
+                    aspect-ratio: 1/1;
+                    border-radius: 50%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                &__name{
+                    font-size: 1.2rem;
+                    color: $white-cl;
+
+                }
+
+                &__quote{
+                    position: absolute;
+                    font-size: 3.5rem;
+                    color: $yellow-cl;
+                    right: 1rem;
+                    top: .5rem;
+                }
+
+            }
+
+            &__content{
+                overflow: scroll;
+                scroll-behavior: smooth;
+                overflow-x: hidden;
+                overflow-y: hidden;
+                p{
+                    font-size: 1rem;
+                    text-align: left;
+                }
+            }
+        }
+    }
 }

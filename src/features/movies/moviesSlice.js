@@ -18,7 +18,7 @@ export const fetchAsyncDetailMovie = createAsyncThunk('movies/fetchAsyncDetailMo
     
 })
 
-export const fetchAsyncActors = createAsyncThunk('movie/fetchAsyncActors', async (movieId) => {
+export const fetchAsyncActors = createAsyncThunk('movies/fetchAsyncActors', async (movieId) => {
     if(movieId) {
         const response = await movieApi.get(`3/movie/${movieId}/casts?api_key=${api_key}`)
         console.log('cast: ', response.data)
@@ -26,10 +26,19 @@ export const fetchAsyncActors = createAsyncThunk('movie/fetchAsyncActors', async
     }
 })
 
+export const fetchAsyncReviews = createAsyncThunk('movies/fetchAsyncReviews', async (movieId) => {
+    if(movieId) {
+        const response = await movieApi.get(`3/movie/${movieId}/reviews?api_key=${api_key}`)
+        console.log('reviews: ', response.data)
+        return response.data
+    }
+})
+
 const initialState = {
     movies: [],
     detailMovie: {},
-    actors: []
+    actors: [],
+    reviews: []
 }
 
 const moviesSlice = createSlice({
@@ -73,6 +82,17 @@ const moviesSlice = createSlice({
         },
         [fetchAsyncActors.rejected]: () => {
             console.log('rejected')
+        },
+        [fetchAsyncReviews.pending]: () => {
+            console.log('pending')
+        },
+        [fetchAsyncReviews.fulfilled]: (state, {payload}) => {
+            console.log('successfully!!!')
+
+            return {...state, reviews: payload }
+        },
+        [fetchAsyncReviews.rejected]: () => {
+            console.log('rejected')
         }
     }
 })
@@ -82,5 +102,6 @@ export const { addMovie } = moviesSlice.actions
 export const getAllMovies = state => state.movies.movies
 export const getDetailMovie = state => state.movies.detailMovie
 export const getActors = state => state.movies.actors
+export const getReviews = state => state.movies.reviews
 
 export default moviesSlice.reducer

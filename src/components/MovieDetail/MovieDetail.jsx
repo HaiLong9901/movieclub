@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchAsyncActors, fetchAsyncDetailMovie, getActors, getDetailMovie } from '../../features/movies/moviesSlice'
+import { fetchAsyncActors, fetchAsyncDetailMovie, fetchAsyncReviews, getActors, getDetailMovie, getReviews } from '../../features/movies/moviesSlice'
 import { useParams } from 'react-router-dom'
 import { AiFillStar, AiFillEye, AiOutlineYoutube } from 'react-icons/ai'
-import { Button } from '@mui/material'
+import { FaQuoteRight } from 'react-icons/fa'
+import { Button, Avatar } from '@mui/material'
 import Slider from 'react-slick'
 import { setting } from '../../common/setting'
 import './MovieDetail.scss'
@@ -16,12 +17,14 @@ function MovieDetail() {
   useEffect(() => {
    dispatch(fetchAsyncDetailMovie(movieId))
    dispatch(fetchAsyncActors(movieId))
+   dispatch(fetchAsyncReviews(movieId))
   }, [dispatch,movieId])
 
   //  const data = useSelector(state => state.movies.detailMovie)
   const data = useSelector(getDetailMovie)
   const actors = useSelector(getActors).cast
-  console.log(data)
+  const reviews = useSelector(getReviews).results
+  console.log(reviews)
   return (
     <div className="movieDetail" style={{
       background: `url("https://image.tmdb.org/t/p/w500/${data.backdrop_path}") no-repeat fixed center`,
@@ -68,9 +71,26 @@ function MovieDetail() {
         </div>
         <div className='movieDetail__sector'><h3>Reviews</h3></div>
         <div className="movieDetail__reviews">
-          <div className="movieDetail__reviews__card">
-            
-          </div>
+          <Slider {...setting}>
+              {reviews?reviews.map(review => (
+                <div className="movieDetail__reviews__card">
+                <div className="movieDetail__reviews__card__header">
+                  <div className="movieDetail__reviews__card__header__img">
+                    <Avatar src={review.author_details.avatar_path?review.author_details.avatar_path.substring(1):''} sx={{
+                      width: '80%',
+                      height: '80%'
+                    }} />
+                  </div>
+                  <h3 className='movieDetail__reviews__card__header__name'>{review.author_details.username}</h3>
+                  <FaQuoteRight className='movieDetail__reviews__card__header__quote'/>
+                </div>
+                <div className="movieDetail__reviews__card__content">
+                  <p>{review.content||''}</p>
+                </div>
+              </div>
+              )):''}
+          </Slider>
+          
         </div>
       </div>
       
