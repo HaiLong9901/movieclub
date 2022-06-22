@@ -3,6 +3,7 @@
 .movieDetail{
     background-size: cover !important;
     backdrop-filter: blur(2rem) !important;
+
     span{
         color: #fff;
     }
@@ -11,6 +12,7 @@
     }
     &__wrapper{
         backdrop-filter: blur(.6rem);
+        padding: 2rem 0;
     }
     
     &__sector{
@@ -188,5 +190,9 @@
                 }
             }
         }
+    }
+
+    &__similarMovies{
+        padding: 0 5rem;
     }
 }

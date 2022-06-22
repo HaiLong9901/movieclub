@@ -4,13 +4,14 @@ import { fetchAsyncActors, fetchAsyncDetailMovie, fetchAsyncReviews, fetchAsyncS
 import { useParams } from 'react-router-dom'
 import { AiFillStar, AiFillEye, AiOutlineYoutube } from 'react-icons/ai'
 import { FaQuoteRight } from 'react-icons/fa'
-import { Button, Avatar } from '@mui/material'
+import { Button, Avatar, Grid, Item } from '@mui/material'
 import Slider from 'react-slick'
 import Title from '../Title/Title'
 import { setting } from '../../common/setting'
 import { settingForReview } from '../../common/settingForReview'
 import './MovieDetail.scss'
 import unkownActor from '../../images/unknown.jfif'
+import MovieCard from '../MovieCard/MovieCard'
 
 function MovieDetail() {
   const param = useParams()
@@ -25,10 +26,11 @@ function MovieDetail() {
 
   //  const data = useSelector(state => state.movies.detailMovie)
   const data = useSelector(getDetailMovie)
-  const actors = useSelector(getActors).cast
-  const reviews = useSelector(getReviews).results
-  const similarMovies = useSelector(getSimilarMovies).results
+  const actors = useSelector(getActors)
+  const reviews = useSelector(getReviews)
+  const similarMovies = useSelector(getSimilarMovies)
 
+  console.log('similar: ', similarMovies)
 
   const parseDate = (date) => {
     const time = new Date(Date.parse(date)).toUTCString()
@@ -103,6 +105,17 @@ function MovieDetail() {
           </Slider>
         </div>
         <Title>Similar movies</Title>
+        <div className="movieDetail__similarMovies">
+          <Grid container spacing={2}>
+            {similarMovies?similarMovies.map(movie => (
+              <Grid item xs={2} key={movie.id}>
+                <MovieCard movie={movie} />
+              </Grid>
+            )):''}
+          </Grid>
+          
+        </div>
+        
       </div>
       
     </div>

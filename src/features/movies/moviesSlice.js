@@ -11,7 +11,7 @@ export const fetchAsyncDetailMovie = createAsyncThunk('movies/fetchAsyncDetailMo
     if(movieId) {
        const response = await movieApi.get(`3/movie/${movieId}?api_key=${api_key}&append_to_response=videos`)
        console.log(response.data)
-       return response.data 
+       return response.data
     }
 
     return {}
@@ -22,7 +22,7 @@ export const fetchAsyncActors = createAsyncThunk('movies/fetchAsyncActors', asyn
     if(movieId) {
         const response = await movieApi.get(`3/movie/${movieId}/casts?api_key=${api_key}`)
         console.log('cast: ', response.data)
-        return response.data
+        return response.data.cast
     }
 })
 
@@ -30,16 +30,22 @@ export const fetchAsyncReviews = createAsyncThunk('movies/fetchAsyncReviews', as
     if(movieId) {
         const response = await movieApi.get(`3/movie/${movieId}/reviews?api_key=${api_key}`)
         console.log('reviews: ', response.data)
-        return response.data
+        return response.data.results
     }
 })
 
 export const fetchAsyncSimilarMovies = createAsyncThunk('movies/fetchAsyncSimilarMovies', async (movieId) => {
     if(movieId) {
         const response = await movieApi.get(`3/movie/${movieId}/similar?api_key=${api_key}`)
-        console.log('similar: ', response.data)
-        return response.data
+
+        return response.data.results
     }
+})
+
+export const fetchAsyncTopRateMovies = createAsyncThunk('movies/fetchAsyncTopRateMovies', async () => {
+    const response = await movieApi.get(`3/movie/top_rated?api_key=${api_key}&language=en-US&page=1`)
+    console.log('top_rated: ', response)
+    return response.data.results
 })
 
 const initialState = {
@@ -47,7 +53,8 @@ const initialState = {
     detailMovie: {},
     actors: [],
     reviews: [],
-    similar: []
+    similar: [],
+    topRate: []
 }
 
 const moviesSlice = createSlice({
@@ -63,7 +70,7 @@ const moviesSlice = createSlice({
             console.log('pending')
         },
         [fetchAsyncMovies.fulfilled]: (state, {payload}) => {
-            console.log('successfully!!!', payload)
+            console.log('successfully!!!')
 
             return {...state, movies: payload}
         },
@@ -113,6 +120,17 @@ const moviesSlice = createSlice({
         },
         [fetchAsyncSimilarMovies.rejected]: () => {
             console.log('rejected')
+        },
+        [fetchAsyncTopRateMovies.pending]: () => {
+            console.log('pending')
+        },
+        [fetchAsyncTopRateMovies.fulfilled]: (state, {payload}) => {
+            console.log('successfully!!!')
+
+            return {...state, topRate: payload }
+        },
+        [fetchAsyncTopRateMovies.rejected]: () => {
+            console.log('rejected')
         }
     }
 })
@@ -124,5 +142,6 @@ export const getDetailMovie = state => state.movies.detailMovie
 export const getActors = state => state.movies.actors
 export const getReviews = state => state.movies.reviews
 export const getSimilarMovies = state => state.movies.similar
+export const getTopRateMovies = state => state.movies.topRate
 
 export default moviesSlice.reducer
