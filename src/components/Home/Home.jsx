@@ -6,6 +6,7 @@ import { fetchAsyncMovies, fetchAsyncTopRateMovies, getTopRateMovies} from '../.
 import Title from '../Title/Title'
 import Slider from 'react-slick'
 import { setting } from '../../common/setting'
+import TopRatedMovies from '../TopRatedMovies/TopRatedMovies'
 
 function Home() {
   const dispatch = useDispatch()
@@ -15,12 +16,13 @@ function Home() {
     dispatch(fetchAsyncTopRateMovies())
   }, [dispatch])
 
-  const popularMovies = useSelector(getTopRateMovies)
+  // const topRatedMovies = useSelector(getTopRateMovies)
 
-  console.log('popular: ', popularMovies)
+  // console.log('topRated: ', topRatedMovies)
   return (
     <div className="home">
-      {/* <div className="home__banner">Home</div> */}
+      <Title>Top rated</Title>
+      <TopRatedMovies />
       <Title>Now playing</Title>
       <MovieListing />
       <div className="home__title"><h3>Popular movie</h3></div>

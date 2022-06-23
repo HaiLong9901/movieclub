@@ -1,0 +1,35 @@
+@import '../../common/colors.scss';
+
+.topRatedMovies{
+    display: flex;
+    padding: 0 5rem;
+
+    .topRatedMovies__movie{
+        width: 20%;
+        position: relative;
+        display: flex;
+        justify-content: right;
+
+        .topRatedMovies__movie__number{
+            position: absolute;
+            // z-index: 1000;
+            left: -.5rem;
+            bottom: -2rem;
+            h1{
+                font-size: 15rem;
+                -webkit-text-stroke: .3rem $yellow-cl;
+                color: transparent;
+                margin: 0;
+                
+            }
+        }
+
+        .topRatedMovies__movie__card{
+            width: 65%;
+            // position: absolute;
+            // position: absolute;
+            // top: 0;
+            // display: none;
+        }
+    }
+}

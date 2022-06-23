@@ -10,6 +10,7 @@ function Header() {
     setAnchorEl(e.currentTarget)
   }
   const handleClose = () => {
+    console.log('close')
     setAnchorEl(null)
   }
   return (
@@ -24,7 +25,7 @@ function Header() {
         aria-expanded={open ? 'basic-menu' : undefined}
         onClick={handleClick}
         >
-          <Link to='/movie' className='header__menu__item' >Movie</Link>
+          <Link to='/' className='header__menu__item' >Movie</Link>
         </Button>
         
         <Link to='/' className='header__menu__item' >About us</Link>
