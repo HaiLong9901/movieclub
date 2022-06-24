@@ -15,7 +15,7 @@ function MovieListing() {
   let renderMovies = movies.map((movie, index) => {
     // if(index > 10) return ;
     return (
-      <Grid item xs={2.4} key={movie.key}>
+      <Grid item xs={6} sm={4} md={2.4} key={movie.key}>
         <MovieCard movie={movie} />
       </Grid>
     )
