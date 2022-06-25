@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react'
 import './Home.scss'
 import MovieListing from '../MovieListing/MovieListing'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchAsyncMovies, fetchAsyncTopRateMovies, getTopRateMovies} from '../../features/movies/moviesSlice'
+import { fetchAsyncMovies, fetchAsyncPopularMovies, fetchAsyncTopRateMovies, fetchAsyncUpComingMovies} from '../../features/movies/moviesSlice'
 import Title from '../Title/Title'
 import Slider from 'react-slick'
 import { setting } from '../../common/setting'
 import TopRatedMovies from '../TopRatedMovies/TopRatedMovies'
+import PopularMovies from '../PopularMovies/PopularMovies'
+import UpComingMovies from '../UpComingMovies/UpComingMovies'
 
 function Home() {
   const dispatch = useDispatch()
@@ -14,6 +16,8 @@ function Home() {
   useEffect(() => {
     dispatch(fetchAsyncMovies())
     dispatch(fetchAsyncTopRateMovies())
+    dispatch(fetchAsyncPopularMovies())
+    dispatch(fetchAsyncUpComingMovies())
   }, [dispatch])
 
   // const topRatedMovies = useSelector(getTopRateMovies)
@@ -21,6 +25,9 @@ function Home() {
   // console.log('topRated: ', topRatedMovies)
   return (
     <div className="home">
+      <UpComingMovies />
+      <Title>Popular</Title>
+      <PopularMovies />
       <Title>Top rated</Title>
       <TopRatedMovies />
       <Title>Now playing</Title>
