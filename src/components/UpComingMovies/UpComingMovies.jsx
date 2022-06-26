@@ -20,11 +20,13 @@ function UpComingMovies() {
 
   const movies = useSelector(getUpComingMovies)
   return (
-    <div className="upComingMovies">
+    <div className="upComingMovies" >
         <Slider {...setting}>
             {movies?movies.map(movie => (
-                <div className="upComingMovies__card">
-                    <div className="upComingMovies__card__container">
+                <div className="upComingMovies__card" key={movie.id}>
+                    <div className="upComingMovies__card__container" style={{
+                        background: `linear-gradient(0, rgba(3,76,101,0.8), rgba(225,225,225,0.2)), url("https://image.tmdb.org/t/p/w500/${movie.backdrop_path}") no-repeat fixed center`,
+                    }}>
                         <div className="upComingMovies__card__container__description">
                             <h2>{movie.title}</h2>
                             <p>{movie.overview}</p>

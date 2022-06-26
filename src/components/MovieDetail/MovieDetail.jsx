@@ -16,6 +16,8 @@ import MovieCard from '../MovieCard/MovieCard'
 function MovieDetail() {
   const param = useParams()
   const movieId = param.imdbID
+  const movieType = param.type
+  console.log('type: ', movieType)
   const dispatch = useDispatch()
   useEffect(() => {
    dispatch(fetchAsyncDetailMovie(movieId))

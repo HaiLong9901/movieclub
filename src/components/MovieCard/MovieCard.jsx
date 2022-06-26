@@ -6,9 +6,10 @@ function MovieCard(props) {
 
   const { movie } = props
   const navigate = useNavigate()
+  console.log('media_type: ', movie.media_type)
 
   return (
-    <div className="movieCard" onClick={() => navigate(`/movie/${movie.id}`)}>
+    <div className="movieCard" onClick={() => navigate(`/movies/${movie.id}`)}>
       <div className="movieCard__inner">
         <div className="movieCard__top">
           <img src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} alt={movie.title} />

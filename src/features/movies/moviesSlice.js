@@ -46,7 +46,7 @@ export const fetchAsyncTopRateMovies = createAsyncThunk('movies/fetchAsyncTopRat
 })
 
 export const fetchAsyncPopularMovies = createAsyncThunk('movies/fetchAsyncPopularMovies', async () => {
-    const response = await movieApi.get(`3/movie/popular?api_key=${api_key}&language=en-US&page=1`)
+    const response = await movieApi.get(`3/trending/all/day?api_key=${api_key}`)
     return response.data.results
 })
 

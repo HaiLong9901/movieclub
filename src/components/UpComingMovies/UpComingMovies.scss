@@ -1,0 +1,17 @@
+@import '../../common/colors.scss';
+
+.upComingMovies{
+    height: 40rem;
+    &__card {
+        width: 100%;
+        // height: 30rem
+
+        &__container{
+            width: 100%;
+            height: 40rem;
+            background-size: cover !important;
+            transform: translateY(-1.5rem);
+            background-color: rgba($color: #000000, $alpha: 0.8) !important;
+        }
+    }
+}
