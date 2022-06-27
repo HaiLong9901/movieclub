@@ -64,7 +64,8 @@ const initialState = {
     similar: [],
     topRate: [],
     popular: [],
-    upComing: []
+    upComing: [],
+    status: 'idle'
 }
 
 const moviesSlice = createSlice({
@@ -73,6 +74,9 @@ const moviesSlice = createSlice({
     reducers: {
         addMovie: (state, {payload}) => {
             state.movies = payload
+        },
+        setPostStatus: (state) => {
+            state.status = 'idle'
         }
     },
     extraReducers: {
@@ -87,49 +91,45 @@ const moviesSlice = createSlice({
         [fetchAsyncMovies.rejected]: () => {
             console.log('rejected')
         },
-        [fetchAsyncDetailMovie.pending]: () => {
-            console.log('pending')
+        [fetchAsyncDetailMovie.pending]: (state, action) => {
+            return {...state, status: 'loading'}
         },
         [fetchAsyncDetailMovie.fulfilled]: (state, {payload}) => {
-            console.log('successfully!!!')
 
-            return {...state, detailMovie: payload}
+            return {...state, detailMovie: payload, status: 'successfully'}
         },
-        [fetchAsyncDetailMovie.rejected]: () => {
-            console.log('rejected')
+        [fetchAsyncDetailMovie.rejected]: (state, action) => {
+            return {...state, status: 'failed'}
         },
-        [fetchAsyncActors.pending]: () => {
-            console.log('pending')
+        [fetchAsyncActors.pending]: (state, action) => {
+            return {...state, status: 'loading'}
         },
         [fetchAsyncActors.fulfilled]: (state, {payload}) => {
-            console.log('successfully!!!')
 
-            return {...state, actors: payload }
+            return {...state, actors: payload, status: 'successfully'}
         },
-        [fetchAsyncActors.rejected]: () => {
-            console.log('rejected')
+        [fetchAsyncActors.rejected]: (state, action) => {
+            return {...state, status: 'failed'}
         },
-        [fetchAsyncReviews.pending]: () => {
-            console.log('pending')
+        [fetchAsyncReviews.pending]: (state, action) => {
+            return {...state, status: 'loading'}
         },
         [fetchAsyncReviews.fulfilled]: (state, {payload}) => {
-            console.log('successfully!!!')
 
-            return {...state, reviews: payload }
+            return {...state, reviews: payload, status: 'successfully'}
         },
-        [fetchAsyncReviews.rejected]: () => {
-            console.log('rejected')
+        [fetchAsyncReviews.rejected]: (state, action) => {
+            return {...state, status: 'failed'}
         },
-        [fetchAsyncSimilarMovies.pending]: () => {
-            console.log('pending')
+        [fetchAsyncSimilarMovies.pending]: (state, action) => {
+            return {...state, status: 'loading'}
         },
         [fetchAsyncSimilarMovies.fulfilled]: (state, {payload}) => {
-            console.log('successfully!!!')
 
-            return {...state, similar: payload }
+            return {...state, similar: payload, status: 'successfully'}
         },
-        [fetchAsyncSimilarMovies.rejected]: () => {
-            console.log('rejected')
+        [fetchAsyncSimilarMovies.rejected]: (state, action) => {
+            return {...state, status: 'failed'}
         },
         [fetchAsyncTopRateMovies.pending]: () => {
             console.log('pending')
@@ -167,7 +167,7 @@ const moviesSlice = createSlice({
     }
 })
 
-export const { addMovie } = moviesSlice.actions
+export const { addMovie, setPostStatus } = moviesSlice.actions
 
 export const getAllMovies = state => state.movies.movies
 export const getDetailMovie = state => state.movies.detailMovie

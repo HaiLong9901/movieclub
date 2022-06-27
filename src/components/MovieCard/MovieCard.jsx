@@ -1,15 +1,21 @@
 import React from 'react'
 import './MovieCard.scss'
 import { useNavigate } from 'react-router-dom'
+import { setPostStatus } from '../../features/movies/moviesSlice'
+import { useDispatch, useSelector } from 'react-redux'
 
 function MovieCard(props) {
 
   const { movie } = props
   const navigate = useNavigate()
-  console.log('media_type: ', movie.media_type)
+  const dispatch = useDispatch()
+  const status = useSelector(state => state.movies)
 
   return (
-    <div className="movieCard" onClick={() => navigate(`/movies/${movie.id}`)}>
+    <div className="movieCard" onClick={() => {
+      navigate(`/movies/${movie.id}`)
+      dispatch(setPostStatus(status))
+    }}>
       <div className="movieCard__inner">
         <div className="movieCard__top">
           <img src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} alt={movie.title} />

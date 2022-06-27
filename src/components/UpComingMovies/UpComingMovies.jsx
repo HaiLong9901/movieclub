@@ -4,6 +4,7 @@ import { getUpComingMovies } from '../../features/movies/moviesSlice'
 import Slider from 'react-slick'
 import { Button } from '@mui/material'
 import { AiOutlineYoutube } from 'react-icons/ai'
+import { TbFileDescription } from 'react-icons/tb'
 import './UpComingMovies.scss'
 
 const setting = {
@@ -13,8 +14,8 @@ const setting = {
       slidesToShow: 1,
       slidesToScroll: 1,
       initialSlide: 0,
-    //   autoplay: true,
-    //   autoplaySpeed: 5000,
+      autoplay: true,
+      autoplaySpeed: 5000,
 }
 function UpComingMovies() {
 
@@ -32,7 +33,12 @@ function UpComingMovies() {
                             <p>{movie.overview}</p>
                             <div className="upComingMovies__card__container__description__button">
                             <Button variant='contained' startIcon={<AiOutlineYoutube />} className='movieDetail__description__button'>Trailer</Button>
+                            <Button variant='contained' startIcon={<TbFileDescription />} className='movieDetail__description__button'>Show detail</Button>
                             </div>
+                        </div>
+
+                        <div className="upComingMovies__card__container__image">
+                            <img src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}/>
                         </div>
                     </div>
                 </div>
