@@ -1,6 +1,7 @@
 import React from 'react'
-import { getPopularMovies } from '../../features/movies/moviesSlice'
-import { useSelector } from 'react-redux'
+import { fetchAsyncPopularMovies, getPopularMovies, getPopularShows } from '../../features/movies/moviesSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { useGetPopularMoviesOrShowsQuery } from '../../features/api/apiSlice'
 import TVCard from '../TVCard/TVCard'
 import Slider from 'react-slick'
 import { ToggleButton, ToggleButtonGroup } from '@mui/material'
@@ -45,14 +46,19 @@ const setting = {
       ]
 }
 function PopularMovies() {
-  const [alignment, setAlignment] = useState('movies')
+  const [alignment, setAlignment] = useState('movie')
+  const dispatch = useDispatch()
 
   const movies = useSelector(getPopularMovies)
+
   // const shows = useSelector(getPopularMovies())
   const handleChange = (event, newAlignMent) => {
     setAlignment(newAlignMent)
     // setType(prev => prev==='movie'?'tv':'movie')
   }
+  useEffect(() => {
+    dispatch(fetchAsyncPopularMovies(alignment))
+  }, [alignment, dispatch])
   // data = shows
   // useEffect(() => {
   //   data = alignment==='movies'?movies:shows
@@ -67,8 +73,8 @@ function PopularMovies() {
       exclusive
       onChange={handleChange}
       >
-        <ToggleButton value="movies">Movies</ToggleButton>
-        <ToggleButton value="shows">Shows</ToggleButton>
+        <ToggleButton value="movie">Movies</ToggleButton>
+        <ToggleButton value="tv">Shows</ToggleButton>
       </ToggleButtonGroup>
 
       </div>

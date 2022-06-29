@@ -46,6 +46,10 @@ export const fetchAsyncTopRateMovies = createAsyncThunk('movies/fetchAsyncTopRat
 })
 
 export const fetchAsyncPopularMovies = createAsyncThunk('movies/fetchAsyncPopularMovies', async (type) => {
+    const response = await movieApi.get(`3/${type}/popular?api_key=${api_key}&language=en-US&page=1`)
+    return response.data.results
+})
+export const fetchAsyncPopularShows = createAsyncThunk('movies/fetchAsyncPopularShows', async (type) => {
     const response = await movieApi.get(`3/tv/popular?api_key=${api_key}&language=en-US&page=1`)
     return response.data.results
 })
@@ -64,6 +68,7 @@ const initialState = {
     similar: [],
     topRate: [],
     popular: [],
+    popularShow: [],
     upComing: [],
     status: 'idle'
 }
@@ -153,6 +158,17 @@ const moviesSlice = createSlice({
         [fetchAsyncPopularMovies.rejected]: () => {
             console.log('rejected')
         },
+        [fetchAsyncPopularShows.pending]: () => {
+            console.log('pending')
+        },
+        [fetchAsyncPopularShows.fulfilled]: (state, {payload}) => {
+            console.log('successfully!!!')
+
+            return {...state, popularShow: payload }
+        },
+        [fetchAsyncPopularShows.rejected]: () => {
+            console.log('rejected')
+        },
         [fetchAsyncUpComingMovies.pending]: () => {
             console.log('pending')
         },
@@ -176,6 +192,7 @@ export const getReviews = state => state.movies.reviews
 export const getSimilarMovies = state => state.movies.similar
 export const getTopRateMovies = state => state.movies.topRate
 export const getPopularMovies =  state => state.movies.popular
+export const getPopularShows =  state => state.movies.popularShow
 export const getUpComingMovies = state => state.movies.upComing
 
 export default moviesSlice.reducer

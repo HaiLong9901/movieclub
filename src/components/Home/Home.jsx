@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './Home.scss'
 import MovieListing from '../MovieListing/MovieListing'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchAsyncMovies, fetchAsyncPopularMovies, fetchAsyncTopRateMovies, fetchAsyncUpComingMovies} from '../../features/movies/moviesSlice'
+import { fetchAsyncMovies, fetchAsyncPopularMovies, fetchAsyncPopularShows, fetchAsyncTopRateMovies, fetchAsyncUpComingMovies} from '../../features/movies/moviesSlice'
 import Title from '../Title/Title'
 import Slider from 'react-slick'
 import { setting } from '../../common/setting'
@@ -18,6 +18,7 @@ function Home() {
     dispatch(fetchAsyncTopRateMovies())
     dispatch(fetchAsyncPopularMovies())
     dispatch(fetchAsyncUpComingMovies())
+    dispatch(fetchAsyncPopularShows())
   }, [dispatch])
 
   // const topRatedMovies = useSelector(getTopRateMovies)

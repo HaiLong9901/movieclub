@@ -1,0 +1,25 @@
+@import '../../common/colors.scss';
+
+.Loading{
+    width: 100vw;
+    height: 100vh;
+    background: $yellow-cl;
+    position: relative;
+    z-index: 10000;
+
+    .line{
+        height: 1rem;
+        color: $blue-cl;
+        position: absolute;
+        top: 0;
+        animation: load 5s infinite;
+    }
+
+    @keyframes load {
+        0% { width: 10%;}
+        25% { width: 25%;}
+        50% {width: 50%;}
+        75% { width: 75%;}
+        100% {width: 100%;}
+    }
+}

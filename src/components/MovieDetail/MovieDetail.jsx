@@ -13,6 +13,7 @@ import './MovieDetail.scss'
 import unkownActor from '../../images/unknown.jfif'
 import MovieCard from '../MovieCard/MovieCard'
 import ActorCard from '../ActorCard/ActorCard'
+import Loading from '../Loading/Loading'
 
 function MovieDetail() {
   const param = useParams()
@@ -22,6 +23,9 @@ function MovieDetail() {
 
   console.log('type: ', movieType)
   const dispatch = useDispatch()
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [movieId])
   useEffect(() => {
    if(postStatus === 'idle'){
     dispatch(fetchAsyncDetailMovie(movieId))  
@@ -48,7 +52,7 @@ function MovieDetail() {
   let content;
 
   if(postStatus === 'loading') {
-    content = <h1>Loading</h1>
+    content = <Loading />
   } else if(postStatus === 'successfully') {
     console.log('fetch success')
     content = (
@@ -86,7 +90,7 @@ function MovieDetail() {
               {actors?actors.map(actor => (
                 <div className="movieDetail__actors__card" key={actor.id}>
                   <div className="movieDetail__actors__card__img">
-                    <img src={actor.profile_path?`https://image.tmdb.org/t/p/original/${actor.profile_path}`:unkownActor} alt={actor.original_name} />
+                    <img src={actor.profile_path?`https://image.tmdb.org/t/p/original/${actor.profile_path}`:unkownActor} alt={actor.original_name} /> 
                   </div>
                   <div className="movieDetail__actors__card__infor">
                     <h5>{actor.original_name}</h5>
