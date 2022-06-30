@@ -1,13 +1,12 @@
-import React from 'react'
-import { fetchAsyncPopularMovies, getPopularMovies, getPopularShows } from '../../features/movies/moviesSlice'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useState } from 'react'
 import { useGetPopularMoviesOrShowsQuery } from '../../features/api/apiSlice'
 import TVCard from '../TVCard/TVCard'
 import Slider from 'react-slick'
 import { ToggleButton, ToggleButtonGroup } from '@mui/material'
 import './PopularMovies.scss'
-import { useState } from 'react'
-import { useEffect } from 'react'
+import Loading from '../Loading/Loading'
+import MovieCard from '../MovieCard/MovieCard'
+import { theme } from '../customizeColor'
 
 const setting = {
   dots: false,
@@ -16,8 +15,8 @@ const setting = {
       slidesToShow: 6,
       slidesToScroll: 4,
       initialSlide: 0,
-      // autoplay: true,
-      // autoplaySpeed: 5000,
+      autoplay: true,
+      autoplaySpeed: 5000,
       responsive: [
         {
           breakpoint: 1024,
@@ -47,43 +46,54 @@ const setting = {
 }
 function PopularMovies() {
   const [alignment, setAlignment] = useState('movie')
-  const dispatch = useDispatch()
 
-  const movies = useSelector(getPopularMovies)
+  const {
+    data: movies = {},
+    isLoading,
+    isSuccess,
+    isError,
+    error
+  } = useGetPopularMoviesOrShowsQuery(alignment)
 
-  // const shows = useSelector(getPopularMovies())
   const handleChange = (event, newAlignMent) => {
+    console.log('prev', alignment)
+    if(newAlignMent===null) newAlignMent = alignment
     setAlignment(newAlignMent)
-    // setType(prev => prev==='movie'?'tv':'movie')
+    console.log('after', newAlignMent)
   }
-  useEffect(() => {
-    dispatch(fetchAsyncPopularMovies(alignment))
-  }, [alignment, dispatch])
-  // data = shows
-  // useEffect(() => {
-  //   data = alignment==='movies'?movies:shows
-  // }, [alignment])
 
-  return (
-    <div className="popularMovies">
-      <div className="toggle__button">
+
+  let content
+
+  if(isLoading) {
+    content = <Loading />
+  } else if(isSuccess) {
+    content = <>
+    <div className="toggle__button">
       <ToggleButtonGroup
       color="primary"
       value={alignment}
       exclusive
       onChange={handleChange}
       >
-        <ToggleButton value="movie">Movies</ToggleButton>
-        <ToggleButton value="tv">Shows</ToggleButton>
+        <ToggleButton className='toggle__button__btn' value="movie">Movies</ToggleButton>
+        <ToggleButton className='toggle__button__btn' value="tv">Shows</ToggleButton>
       </ToggleButtonGroup>
 
       </div>
         <Slider {...setting}>
-            {movies?movies.map(movie => (
-                // <MovieCard key={movie.id} movie={movie} />
-                <TVCard key={movie.id} show={movie} />
-            )):''}
+            {movies.results?.map(movie => (
+                  alignment==='movie'?<MovieCard key={movie.id} movie={movie} />:<TVCard key={movie.id} show={movie} />
+              ))}
         </Slider>
+    </>
+  } else if(isError) {
+    content = <p>{error.toString()}</p>
+  }
+
+  return (
+    <div className="popularMovies">
+        {content}
     </div>
   )
 }

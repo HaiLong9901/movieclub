@@ -13,8 +13,16 @@ export const apiSlice = createApi({
 
         getPopularMoviesOrShows: builder.query({
             query: (type) => `3/${type}/popular?api_key=${api_key}&language=en-US&page=1`
+        }),
+
+        getUpComingMovies: builder.query({
+            query: () => `3/movie/upcoming?api_key=${api_key}&language=en-US&page=1`
+        }),
+
+        getTopRatedMovies: builder.query({
+            query: () => `3/movie/top_rated?api_key=${api_key}&language=en-US&page=1`
         })
     })
 })
 
-export const { useGetMoviesQuery, useGetPopularMoviesOrShowsQuery } = apiSlice
+export const { useGetMoviesQuery, useGetPopularMoviesOrShowsQuery, useGetUpComingMoviesQuery, useGetTopRatedMoviesQuery } = apiSlice

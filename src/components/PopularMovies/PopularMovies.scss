@@ -1,3 +1,12 @@
+@import '../../common/colors.scss';
+
 .popularMovies{
     padding: 0 5rem;
+
+    .toggle__button {
+        margin-bottom: 2rem;
+        .toggle__button__btn{
+            background: $yellow-cl;
+        }
+    }
 }

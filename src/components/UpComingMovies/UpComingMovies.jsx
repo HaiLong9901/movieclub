@@ -5,7 +5,9 @@ import Slider from 'react-slick'
 import { Button } from '@mui/material'
 import { AiOutlineYoutube } from 'react-icons/ai'
 import { TbFileDescription } from 'react-icons/tb'
+import { useGetUpComingMoviesQuery } from '../../features/api/apiSlice'
 import './UpComingMovies.scss'
+import Loading from '../Loading/Loading'
 
 const setting = {
     dots: false,
@@ -19,11 +21,22 @@ const setting = {
 }
 function UpComingMovies() {
 
-  const movies = useSelector(getUpComingMovies)
-  return (
-    <div className="upComingMovies" >
+  const {
+    data: movies = {},
+    isLoading,
+    isSuccess,
+    isError,
+    error
+  } = useGetUpComingMoviesQuery()
+  
+  let content
+
+  if(isLoading) {
+    content = <Loading />
+  } else if(isSuccess) {
+    content = <>
         <Slider {...setting}>
-            {movies?movies.map(movie => (
+            {movies.results?.map(movie => (
                 <div className="upComingMovies__card" key={movie.id}>
                     <div className="upComingMovies__card__container" style={{
                         background: `linear-gradient(0, rgba(3,76,101,0.8), rgba(225,225,225,0.2)), url("https://image.tmdb.org/t/p/w500/${movie.backdrop_path}") no-repeat fixed center`,
@@ -42,8 +55,15 @@ function UpComingMovies() {
                         </div>
                     </div>
                 </div>
-            )):''}
+            ))}
         </Slider>
+    </>
+  } else if(isError) {
+    content = <p>{error.toString()}</p>
+  }
+  return (
+    <div className="upComingMovies" >
+        {content}
     </div>
   )
 }

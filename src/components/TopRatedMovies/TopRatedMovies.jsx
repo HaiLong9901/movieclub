@@ -1,20 +1,24 @@
 import React from 'react'
 import './TopRatedMovies.scss'
-import { fetchAsyncTopRateMovies, getTopRateMovies } from '../../features/movies/moviesSlice'
-import { useDispatch, useSelector } from 'react-redux'
-import { useEffect } from 'react'
 import MovieCard from '../MovieCard/MovieCard'
+import { useGetTopRatedMoviesQuery } from '../../features/api/apiSlice'
+import Loading from '../Loading/Loading'
 
 function TopRatedMovies() {
-//   const dispatch = useDispatch()
-//   useEffect(() => {
-//     dispatch(fetchAsyncTopRateMovies())
-//   }, [dispatch])
-
-  const movies = useSelector(getTopRateMovies)
-  return (
-    <div className="topRatedMovies">
-        {movies?movies.map((movie, index) => {
+  
+  const {
+    data: movies = {},
+    isLoading,
+    isSuccess,
+    isError,
+    error
+  } = useGetTopRatedMoviesQuery()
+  let content
+  if(isLoading) {
+    content = <Loading />
+  } else if(isSuccess) {
+    content = <>
+        {movies.results?.map((movie, index) => {
             if(index > 4) return '';
             return (
                 <div className="topRatedMovies__movie" key={movie.id}>
@@ -26,7 +30,14 @@ function TopRatedMovies() {
                     </div>
                 </div>
             )
-        }):null}
+        })}
+    </>
+  } else if(isError) {
+    content = <p>{error.toString()}</p>
+  }
+  return (
+    <div className="topRatedMovies">
+        {content}
     </div>
   )
 }

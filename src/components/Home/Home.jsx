@@ -14,11 +14,7 @@ function Home() {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(fetchAsyncMovies())
     dispatch(fetchAsyncTopRateMovies())
-    dispatch(fetchAsyncPopularMovies())
-    dispatch(fetchAsyncUpComingMovies())
-    dispatch(fetchAsyncPopularShows())
   }, [dispatch])
 
   // const topRatedMovies = useSelector(getTopRateMovies)
