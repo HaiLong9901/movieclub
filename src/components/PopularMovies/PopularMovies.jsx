@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 import { useGetPopularMoviesOrShowsQuery } from '../../features/api/apiSlice'
 import TVCard from '../TVCard/TVCard'
 import Slider from 'react-slick'
-import { ToggleButton, ToggleButtonGroup } from '@mui/material'
+import { ToggleButton, ToggleButtonGroup, Skeleton } from '@mui/material'
 import './PopularMovies.scss'
 import Loading from '../Loading/Loading'
 import MovieCard from '../MovieCard/MovieCard'
-import { theme } from '../customizeColor'
+
 
 const setting = {
   dots: false,
@@ -66,7 +66,7 @@ function PopularMovies() {
   let content
 
   if(isLoading) {
-    content = <Loading />
+    content = <Skeleton />
   } else if(isSuccess) {
     content = <>
     <div className="toggle__button">

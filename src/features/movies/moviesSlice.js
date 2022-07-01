@@ -9,8 +9,12 @@ export const fetchAsyncMovies = createAsyncThunk('movies/fetchAsyncMovies', asyn
 })
 export const fetchAsyncDetailMovie = createAsyncThunk('movies/fetchAsyncDetailMovie', async (movieId) => {
     if(movieId) {
-       const response = await movieApi.get(`3/movie/${movieId}?api_key=${api_key}&append_to_response=videos`)
-       return response.data
+       const detail = await movieApi.get(`3/movie/${movieId}?api_key=${api_key}&append_to_response=videos`)
+       const actors = await movieApi.get(`3/movie/${movieId}/casts?api_key=${api_key}`)
+       return {
+        detail: detail.data,
+        actors: actors.data.cast,
+       }
     }
 
     return {}
