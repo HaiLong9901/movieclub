@@ -1,12 +1,19 @@
 @import '../../common/colors.scss';
+@import '../../common/responsive.scss';
 
 .title{
     width: 100%;
     padding: 0 5rem;
+    @include mobile{
+        padding: 0 1rem;
+    }
     box-sizing: border-box;
     margin: 2rem 0;
         h3{
         margin: 1rem;
+        @include mobile {
+            font-size: 1.5rem;
+        }
         font-size: 2rem;
         color: $white-cl;
         display: block;

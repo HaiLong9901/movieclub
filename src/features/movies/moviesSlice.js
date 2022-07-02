@@ -11,9 +11,13 @@ export const fetchAsyncDetailMovie = createAsyncThunk('movies/fetchAsyncDetailMo
     if(movieId) {
        const detail = await movieApi.get(`3/movie/${movieId}?api_key=${api_key}&append_to_response=videos`)
        const actors = await movieApi.get(`3/movie/${movieId}/casts?api_key=${api_key}`)
+       const similar = await movieApi.get(`3/movie/${movieId}/similar?api_key=${api_key}`)
+       const reviews = await movieApi.get(`3/movie/${movieId}/reviews?api_key=${api_key}`)
        return {
         detail: detail.data,
         actors: actors.data.cast,
+        similar: similar.data.results,
+        reviews: reviews.data.results
        }
     }
 
@@ -23,7 +27,7 @@ export const fetchAsyncDetailMovie = createAsyncThunk('movies/fetchAsyncDetailMo
 
 export const fetchAsyncActors = createAsyncThunk('movies/fetchAsyncActors', async (movieId) => {
     if(movieId) {
-        const response = await movieApi.get(`3/movie/${movieId}/casts?api_key=${api_key}`)
+        const response = await movieApi.get(`3/movie/${movieId}/credits?api_key=${api_key}`)
         return response.data.cast
     }
 })

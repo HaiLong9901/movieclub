@@ -1,4 +1,5 @@
 @import '../../common//colors.scss';
+@import '../../common//responsive.scss';
 
 .movieListing{
     // width: 100%;
@@ -6,5 +7,10 @@
     // display: grid;
     // grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     // grid-gap: 1.5rem;
+    display: flex;
+    justify-content: center;
     padding: 0 5rem;
+    @include mobile {
+        padding: 0 1rem;
+    }
 }

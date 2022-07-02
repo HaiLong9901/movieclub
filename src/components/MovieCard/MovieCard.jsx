@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import './MovieCard.scss'
 import { useNavigate } from 'react-router-dom'
 import { setPostStatus } from '../../features/movies/moviesSlice'
 import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
 
 function MovieCard(props) {
 

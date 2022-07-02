@@ -1,10 +1,12 @@
 import React from 'react'
+import { LinearProgress, CircularProgress } from '@mui/material'
 import './Loading.scss'
 
 function Loading() {
   return (
     <div className="Loading">
-        <div className="line"></div>
+        <LinearProgress className='linearLoading' />
+        <CircularProgress className='circularLoading' />
     </div>
   )
 }

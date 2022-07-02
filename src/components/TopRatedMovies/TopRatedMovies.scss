@@ -1,8 +1,12 @@
 @import '../../common/colors.scss';
+@import '../../common/responsive.scss';
 
 .topRatedMovies{
     display: flex;
     padding: 0 5rem;
+    @include mobile{
+        padding: 0 1rem;
+    }
 
     .topRatedMovies__movie{
         width: 20%;
@@ -15,17 +19,28 @@
             // z-index: 1000;
             left: -.5rem;
             bottom: -2rem;
+            @include mobile {
+                display: none;
+            }
             h1{
                 font-size: 15rem;
                 -webkit-text-stroke: .3rem $yellow-cl;
                 color: transparent;
                 margin: 0;
+                @include mobile {
+                    font-size: 5rem;
+                    -webkit-text-stroke: .1rem $yellow-cl;
+                }
                 
             }
         }
 
         .topRatedMovies__movie__card{
             width: 65%;
+
+            @include mobile {
+                width: 100%;
+            }
         }
     }
 }

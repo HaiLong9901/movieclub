@@ -1,22 +1,22 @@
 @import '../../common/colors.scss';
 
 .Loading{
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    gap: 20rem;
+    align-items: center;
 
-    .line{
-        height: 1rem;
-        color: $blue-cl;
-        position: absolute;
-        top: 0;
-        animation: load 5s infinite;
+
+
+    .linearLoading{
+
     }
 
-    @keyframes load {
-        0% { width: 10%;}
-        25% { width: 25%;}
-        50% {width: 50%;}
-        75% { width: 75%;}
-        100% {width: 100%;}
+    .circularLoading{
+
     }
+    
 }

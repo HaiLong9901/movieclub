@@ -29,7 +29,6 @@ function Home() {
       <TopRatedMovies />
       <Title>Now playing</Title>
       <MovieListing />
-      <div className="home__title"><h3>Popular movie</h3></div>
     </div>
   )
 }
