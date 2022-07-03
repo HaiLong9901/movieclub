@@ -24,7 +24,7 @@ function MovieDetail() {
   useEffect(() => {
     window.scrollTo(0, 0)
     dispatch(fetchAsyncDetailMovie(movieId))
-  }, [movieId, dispatch, movieId])
+  }, [movieId, dispatch])
 
   const data = useSelector(getDetailMovie)
   

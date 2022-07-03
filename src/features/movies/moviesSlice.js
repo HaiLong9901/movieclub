@@ -25,6 +25,8 @@ export const fetchAsyncDetailMovie = createAsyncThunk('movies/fetchAsyncDetailMo
     
 })
 
+
+
 export const fetchAsyncActors = createAsyncThunk('movies/fetchAsyncActors', async (movieId) => {
     if(movieId) {
         const response = await movieApi.get(`3/movie/${movieId}/credits?api_key=${api_key}`)
@@ -202,5 +204,6 @@ export const getTopRateMovies = state => state.movies.topRate
 export const getPopularMovies =  state => state.movies.popular
 export const getPopularShows =  state => state.movies.popularShow
 export const getUpComingMovies = state => state.movies.upComing
+
 
 export default moviesSlice.reducer

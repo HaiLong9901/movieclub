@@ -12,7 +12,7 @@ function MovieCard(props) {
   const dispatch = useDispatch()
   const status = useSelector(state => state.movies)
 
-  return (
+  return ( 
     <div className="movieCard" onClick={() => {
       navigate(`/movies/${movie.id}`)
       dispatch(setPostStatus(status))
