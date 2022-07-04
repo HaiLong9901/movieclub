@@ -13,7 +13,9 @@ export const fetchAsyncDetailShow = createAsyncThunk('movies/fetchAsyncDetailSho
     if(showId) {
         const detail = await movieApi.get(`3/tv/${showId}?api_key=${api_key}&language=en-US`)
 
-        return detail
+        return {
+            detail: detail.data
+        }
     }
 
     return {}
@@ -39,12 +41,12 @@ export const showsSlice = createSlice({
             })
             .addCase(fetchAsyncDetailShow.rejected, (state, action) => {
                 state.status = 'failed'
-                state.error = action.error.message
+                // state.error = action.error.message
             })
     }
 })
 
-export const getDetailShow = state => state.movies.detailShow
+export const getDetailShow = state => state.shows.detailShow
 
 export const { setPostStatus } = showsSlice.actions
 

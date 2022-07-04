@@ -9,6 +9,8 @@ export default configureStore({
         [apiSlice.reducerPath]: apiSlice.reducer,
         shows: showsSlice
     },
-    middleware: getDefaultMiddleware => getDefaultMiddleware().concat(apiSlice.middleware)
+    middleware: getDefaultMiddleware => getDefaultMiddleware({
+        serializableCheck: false,
+      }).concat(apiSlice.middleware)
 
 })
