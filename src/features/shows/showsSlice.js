@@ -5,6 +5,7 @@ import { api_key } from "../../common/apis/MovieApiKey";
 const initialState = {
     shows: [],
     detailShow: {},
+    casts: [],
     status: 'idle',
     error: ''
 }
@@ -12,9 +13,11 @@ const initialState = {
 export const fetchAsyncDetailShow = createAsyncThunk('movies/fetchAsyncDetailShow', async (showId) => {
     if(showId) {
         const detail = await movieApi.get(`3/tv/${showId}?api_key=${api_key}&language=en-US`)
+        const casts = await movieApi.get(`3/tv/${showId}}/credits?api_key=${api_key}&language=en-US`)
 
         return {
-            detail: detail.data
+            detail: detail.data,
+            casts: casts.data.cast
         }
     }
 

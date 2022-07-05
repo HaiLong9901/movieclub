@@ -5,6 +5,10 @@ import { fetchAsyncDetailShow, getDetailShow } from '../../features/shows/showsS
 import { AiFillStar, AiFillEye, AiOutlineYoutube } from 'react-icons/ai'
 import { Button, Avatar, Grid, Chip } from '@mui/material'
 import Loading from '../Loading/Loading'
+import Title from '../Title/Title'
+import { setting } from '../../common/setting'
+import Slider from 'react-slick'
+import unkownActor from '../../images/unknown.jfif'
 import './ShowDetail.scss'
 
 function ShowDetail() {
@@ -18,7 +22,7 @@ function ShowDetail() {
 
   const data = useSelector(getDetailShow)
 
-  const { detail } = data
+  const { detail, casts } = data
 
   console.log(detail)
   let content
@@ -44,10 +48,11 @@ function ShowDetail() {
                 <div className="showsDetail__description__infor">
                   <span className='status'>Status: {detail.status}</span>
                   <span className='runtime'>Lates season: {detail.last_episode_to_air.season_number}</span>
-                  <span className='release'>network: <img src={detail.networks?.map(path => `https://image.tmdb.org/t/p/original/${path.logo_path}`)} alt="" /></span>
-                  <span className='budget'>Budget: ${detail.budget}</span>
+                  <span className='network'>Network:<small className='showsDetail__company'><img src={detail.networks?.map(path => `https://image.tmdb.org/t/p/original/${path.logo_path}`)} alt="" /></small> </span>
                   <span className='genres'>Genres: {detail.genres?.map(genre => (
-                    <Chip label={genre.name} variant="outlined" />
+                    <Chip label={genre.name} variant="outlined" style={{
+                      marginLeft: '1rem'
+                    }} />
                   ))}</span>
   
                 </div>
@@ -58,10 +63,10 @@ function ShowDetail() {
               <Button variant='contained' startIcon={<AiOutlineYoutube />} className='showsDetail__description__button'>Trailer</Button>
             </div>
           </div>
-          {/* <Title>Casts</Title>
+          <Title>Casts</Title>
           <div className="showsDetail__actors">
             <Slider { ...setting }>
-              {actorInfor?.map(actor => (
+              {casts?.map(actor => (
                 <div className="showsDetail__actors__card" key={actor.id}>
                   <div className="showsDetail__actors__card__img">
                     <img src={actor.profile_path?`https://image.tmdb.org/t/p/original/${actor.profile_path}`:unkownActor} alt={actor.original_name} /> 
@@ -71,10 +76,25 @@ function ShowDetail() {
                     <span>{actor.character}</span>
                   </div>
                 </div>
-                // <ActorCard key={actor.id} actor={actor} />
               ))}
             </Slider>
           </div>
+          <Title seeAll='hello' linkTo='/'>Seasons</Title>
+          <div className="showsDetail__seasons">
+                {detail.seasons?.map(season => (
+                  <div className="showsDetail__seasons__card">
+                    <div className="showsDetail__seasons__card__image">
+                      <img src={`https://image.tmdb.org/t/p/original/${season.poster_path}`} alt={season.name}/>
+                    </div>
+                    <div className="showsDetail__seasons__card__infor">
+                      <h3>{season.name}</h3>
+                      <span>{season.air_date} | {season.episode_count} Episodes</span>
+                      <p>{season.overview?.substring(0,100)} ...</p>
+                    </div>
+                  </div>
+                ))}
+          </div>
+          { /*
           <Title>Reviews</Title>
           <div className="showsDetail__reviews">
             <Slider {...settingForReview}>

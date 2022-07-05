@@ -4,6 +4,8 @@
 .title{
     width: 100%;
     padding: 0 5rem;
+    display: flex;
+    justify-content: space-between;
     @include mobile{
         padding: 0 1rem;
     }
@@ -19,5 +21,10 @@
         display: block;
         padding: 0 2rem;
         border-left: .3rem solid $yellow-cl;
+        
+        span{
+            font-size: 1.5rem;
+            font-style: italic;
+        }
     }
 }
