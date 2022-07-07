@@ -1,23 +1,49 @@
-import React from 'react'
+import React ,{ useState, useEffect } from 'react'
 import Loading from '../../components/Loading/Loading'
 import MovieCard from '../../components/MovieCard/MovieCard'
-import { useGetMoviesQuery } from '../../features/api/apiSlice'
-import { Grid, FormControl, InputLabel, Select, MenuItem, Box } from '@mui/material'
-import { useState } from 'react'
+import { useGetMoviesQuery, useGetMovieListsQuery, useGetFindQuery } from '../../features/api/apiSlice'
+import { Grid, FormControl, InputLabel, Select, MenuItem, Box, PaginationItem, Pagination, Stack } from '@mui/material'
+import { Link, useLocation, Route, Routes, MemoryRouter, useParams, Navigate, useNavigate } from 'react-router-dom'
 import './MoviePage.scss'
 
+// function Content() {
+//     const location = useLocation()
+//     const query = new URLSearchParams(location.search)
+//     const page = parseInt(query.get('page')||'1',10)
+//     return (
+//         <Pagination
+//         page={page}
+//         count={10}
+//         renderItem={item => (
+//             <PaginationItem
+//             component={Link}
+//             to={`/movies${item.page === 1 ? '' :`?page=${item.page}`}`}
+//             {...item}
+//         />)}
+//          />
+//     )
+
+// }
+
 function MoviePage() {
-  const [genre, setGenre] = useState('All')
-  const handleChange = (e) => {
-    e.target.value = genre
+//   const [genre, setGenre] = useState('All')
+  const [page, setPage] = useState(1)
+//   const handleChange = (e) => {
+//     e.target.value = genre
+//   }
+  const handleChange2 = (e, value) => {
+    setPage(value)
   }
+  useEffect(() => {
+
+  }, [page])
   const {
     data: list,
     isFetching,
     isSuccess,
     isError,
     error
-  } = useGetMoviesQuery()
+  } = useGetMovieListsQuery(!page?1:page)
 
   let content
   if(isFetching) {
@@ -38,7 +64,7 @@ function MoviePage() {
   }
   return (
     <section className="moviePage">
-        <Box sx={{maxWidth: '30%',
+        {/* <Box sx={{maxWidth: '30%',
         paddingBottom: '2rem'
     
     }}> 
@@ -56,9 +82,20 @@ function MoviePage() {
                     <MenuItem value={30}>Thirty</MenuItem>
                 </Select>
             </FormControl>
-        </Box>
+        </Box> */}
         
         {content}
+
+        <Stack className='moviePage__pavigation' spacing={2}>
+            <Pagination count={10} page={page} onChange={handleChange2} />
+        </Stack>
+
+        {/* <MemoryRouter initialEntries={['/movies']} initialIndex={0}> */}
+        {/* <Routes>
+             <Route path='*' element={<Content />} />
+        </Routes> */}
+               
+        {/* </MemoryRouter> */}
     </section>
   )
 }

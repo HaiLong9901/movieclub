@@ -23,8 +23,8 @@ function Header() {
         <Link to='/' className='header__menu__item'>Home</Link>
         <Link to='/movies' className='header__menu__item'>Movie</Link>      
         <Link to='/shows' className='header__menu__item'>Shows</Link>      
-        <Link to='/' className='header__menu__item' >About us</Link>
-        <Link to='/' className='header__menu__item' >Contact</Link>
+        {/* <Link to='/' className='header__menu__item' >About us</Link>
+        <Link to='/' className='header__menu__item' >Contact</Link> */}
 
         <Menu
         id='basic-menu'

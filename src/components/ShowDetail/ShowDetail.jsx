@@ -18,6 +18,7 @@ function ShowDetail() {
 
   useEffect(() => {
     dispatch(fetchAsyncDetailShow(showId))
+    window.scrollTo(0, 0)
   }, [dispatch, showId])
 
   const data = useSelector(getDetailShow)

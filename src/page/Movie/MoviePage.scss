@@ -3,4 +3,23 @@
 
 .moviePage {
     padding: 2rem 5rem;
+
+
+    &__pavigation {
+        margin: 2rem 0;
+        width: 100%;
+        .MuiPagination-root {
+            display: flex !important;
+            justify-content: center;
+
+            li > button{
+                font-size: 1.2rem;
+                color: $white-cl;
+            }
+
+            .Mui-selected {
+                background: $yellow-cl;
+            }
+        }
+    }
 }

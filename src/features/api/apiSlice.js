@@ -40,10 +40,10 @@ export const apiSlice = createApi({
         }),
 
         getMovieLists: builder.query({
-            query: () => `3/movie/now_playing?api_key=<<api_key>>&language=en-US&page=1`
-        })
+            query: page => `3/discover/movie?api_key=${api_key}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_watch_monetization_types=flatrate`
+        }),
     })
 })
 
 export const { useGetMoviesQuery, useGetPopularMoviesOrShowsQuery, useGetUpComingMoviesQuery, useGetTopRatedMoviesQuery,
-useGetDetailMovieQuery, useGetActorsQuery, useGetReviewsQuery, useGetSimilarMoviesQuery, useGetMovieListsQuery } = apiSlice
+useGetDetailMovieQuery, useGetActorsQuery, useGetReviewsQuery, useGetSimilarMoviesQuery, useGetMovieListsQuery} = apiSlice
