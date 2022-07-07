@@ -17,7 +17,7 @@ function MovieListing() {
 
   let renderMovies = movies.results?.map((movie, index) => {
     return (
-      <Grid item xs={6} sm={4} md={2.4} key={movie.key}>
+      <Grid item xs={6} sm={4} md={2.4} key={movie.id}>
         <MovieCard movie={movie} />
       </Grid>
     )

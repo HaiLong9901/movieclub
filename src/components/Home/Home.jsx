@@ -17,9 +17,6 @@ function Home() {
     dispatch(fetchAsyncTopRateMovies())
   }, [dispatch])
 
-  // const topRatedMovies = useSelector(getTopRateMovies)
-
-  // console.log('topRated: ', topRatedMovies)
   return (
     <div className="home">
       <UpComingMovies />

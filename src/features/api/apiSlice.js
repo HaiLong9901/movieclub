@@ -37,9 +37,13 @@ export const apiSlice = createApi({
 
         getSimilarMovies: builder.query({
             query: movieId => `3/movie/${movieId}/similar?api_key=${api_key}`
+        }),
+
+        getMovieLists: builder.query({
+            query: () => `3/movie/now_playing?api_key=<<api_key>>&language=en-US&page=1`
         })
     })
 })
 
 export const { useGetMoviesQuery, useGetPopularMoviesOrShowsQuery, useGetUpComingMoviesQuery, useGetTopRatedMoviesQuery,
-useGetDetailMovieQuery, useGetActorsQuery, useGetReviewsQuery, useGetSimilarMoviesQuery } = apiSlice
+useGetDetailMovieQuery, useGetActorsQuery, useGetReviewsQuery, useGetSimilarMoviesQuery, useGetMovieListsQuery } = apiSlice
