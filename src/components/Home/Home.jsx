@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './Home.scss'
-import MovieListing from '../MovieListing/MovieListing'
+import MovieListing from '../NowPlayingMovie/NowPlayingMovie'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchAsyncMovies, fetchAsyncPopularMovies, fetchAsyncPopularShows, fetchAsyncTopRateMovies, fetchAsyncUpComingMovies} from '../../features/movies/moviesSlice'
 import Title from '../Title/Title'

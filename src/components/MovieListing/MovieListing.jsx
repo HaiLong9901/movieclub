@@ -1,47 +1,21 @@
 import React from 'react'
-import './MovieListing.scss'
-import MovieCard from '../MovieCard/MovieCard'
 import { Grid } from '@mui/material'
-import { useGetMoviesQuery } from '../../features/api/apiSlice'
-import Loading from '../Loading/Loading'
+import MovieCard from '../MovieCard/MovieCard'
+import TVCard from '../TVCard/TVCard'
+import './MovieListing.scss'
 
-function MovieListing() {
-
-  const {
-    data: movies = {},
-    isLoading,
-    isSuccess,
-    isError,
-    error
-  } = useGetMoviesQuery()
-
-  let renderMovies = movies.results?.map((movie, index) => {
-    return (
-      <Grid item xs={6} sm={4} md={2.4} key={movie.id}>
-        <MovieCard movie={movie} />
-      </Grid>
-    )
-  } )
-
-  let content
-
-  if(isLoading) {
-    content = <Loading />
-  } else if(isSuccess) {
-    content = renderMovies
-  } else if(isError) {
-    content = <h3>{error.toString()}</h3>
-  }
-
-  console.log('Movie: ', movies)
-
-
+function MovieListing({movies, type}) {
   return (
-    <div className="movieListing">
-      <Grid container spacing={3}>
-        {content}
-      </Grid>
-    </div>
+    <section className="movieListing">
+        <Grid container spacing={3}>
+        {movies.results?.map((movie, index) => (
+            <Grid item xs={6} sm={4} md={2.4} key={movie.id}>
+                {type==='movie'?<MovieCard movie={movie} />:<TVCard show={movie} />}
+            </Grid>
+            ))
+        }
+        </Grid>
+    </section>
   )
 }
 

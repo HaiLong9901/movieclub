@@ -42,8 +42,12 @@ export const apiSlice = createApi({
         getMovieLists: builder.query({
             query: page => `3/discover/movie?api_key=${api_key}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_watch_monetization_types=flatrate`
         }),
+        getSearch: builder.query({
+            query: () => `3/search/multi?api_key=${api_key}&language=en-US&query=men&page=1&include_adult=false`
+
+        })
     })
 })
 
 export const { useGetMoviesQuery, useGetPopularMoviesOrShowsQuery, useGetUpComingMoviesQuery, useGetTopRatedMoviesQuery,
-useGetDetailMovieQuery, useGetActorsQuery, useGetReviewsQuery, useGetSimilarMoviesQuery, useGetMovieListsQuery} = apiSlice
+useGetDetailMovieQuery, useGetActorsQuery, useGetReviewsQuery, useGetSimilarMoviesQuery, useGetMovieListsQuery, useGetSearchQuery} = apiSlice

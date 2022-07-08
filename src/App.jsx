@@ -7,6 +7,7 @@ import ShowDetail from './components/ShowDetail/ShowDetail';
 import PageNotFound from './components/PageNotFond/PageNotFound'
 import Footer from './components/Footer/Footer'
 import MoviePage from './page/Movie/MoviePage';
+import ShowPage from './page/Show/ShowPage';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/movies' element={<MoviePage />} />
+            <Route path='/shows' element={<ShowPage />} />
             <Route path='/movies/:imdbID' element={<MovieDetail />} />
             <Route path='/shows/:showId' element={<ShowDetail />} />
             <Route path='*' element={<PageNotFound />} />
