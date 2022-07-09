@@ -7,13 +7,48 @@ import { FaQuoteRight } from 'react-icons/fa'
 import { Button, Avatar, Grid, Chip } from '@mui/material'
 import Slider from 'react-slick'
 import Title from '../Title/Title'
-import { setting } from '../../common/setting'
 import { settingForReview } from '../../common/settingForReview'
 import './MovieDetail.scss'
-import unkownActor from '../../images/unknown.jfif'
 import MovieCard from '../MovieCard/MovieCard'
 import Loading from '../Loading/Loading'
+import ActorCard from '../ActorCard/ActorCard'
 
+const setting = {
+  dots: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 8,
+    slidesToScroll: 4,
+    initialSlide: 0,
+    autoplay: true,
+    autoplaySpeed: 5000,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: false
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
+}
 
 function MovieDetail() {
   const param = useParams()
@@ -83,16 +118,7 @@ function MovieDetail() {
           <div className="movieDetail__actors">
             <Slider { ...setting }>
               {actorInfor?.map(actor => (
-                <div className="movieDetail__actors__card" key={actor.id}>
-                  <div className="movieDetail__actors__card__img">
-                    <img src={actor.profile_path?`https://image.tmdb.org/t/p/original/${actor.profile_path}`:unkownActor} alt={actor.original_name} /> 
-                  </div>
-                  <div className="movieDetail__actors__card__infor">
-                    <h5>{actor.original_name}</h5>
-                    <span>{actor.character}</span>
-                  </div>
-                </div>
-                // <ActorCard key={actor.id} actor={actor} />
+                <ActorCard key={actor.id} actor={actor} />
               ))}
             </Slider>
           </div>

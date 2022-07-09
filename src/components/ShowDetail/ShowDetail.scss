@@ -146,11 +146,22 @@
         flex-direction: column;
         gap: 1rem;
         &__card{
-            background: $yellow-cl;
+            width: 70%;
+            background: rgba($pink-cl, 0.4);
             height: 10rem;
             display: flex;
             gap: 1rem;
             border-radius: .5rem;
+            transition: .2s all ease-in;
+            cursor: pointer;
+
+            &:hover {
+                transform: rotate(.75deg);
+                background: rgba($pink-cl, 0.8);
+                h3, span, p {
+                    color: $blue-cl;
+                }
+            }
 
             &__image{
                 height: 100%;
@@ -164,17 +175,17 @@
             &__infor{
                 h3 {
                     font-size: 1.8rem;
-                    color: $dark-cl;
+                    color: $white-cl;
                     margin: .5rem 0;
                 }
                 span{
                     font-size: 1.2rem;
-                    color: $dark-cl;
+                    color: $white-cl;
                     font-weight: 500;
                 }
                 p{
                     font-size: 1.2rem;
-                    color: $dark-cl;
+                    color: $white-cl;
                 }
             }
         }

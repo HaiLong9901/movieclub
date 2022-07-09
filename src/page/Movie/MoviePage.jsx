@@ -12,7 +12,7 @@ function MoviePage() {
     setPage(value)
   }
   useEffect(() => {
-
+    window.scrollTo(0, 0)
   }, [page])
   const search = useGetSearchQuery()
   console.log('Search: ', search)

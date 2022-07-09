@@ -6,10 +6,46 @@ import { AiFillStar, AiFillEye, AiOutlineYoutube } from 'react-icons/ai'
 import { Button, Avatar, Grid, Chip } from '@mui/material'
 import Loading from '../Loading/Loading'
 import Title from '../Title/Title'
-import { setting } from '../../common/setting'
 import Slider from 'react-slick'
-import unkownActor from '../../images/unknown.jfif'
+import ActorCard from '../ActorCard/ActorCard'
 import './ShowDetail.scss'
+
+const setting = {
+  dots: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 8,
+    slidesToScroll: 4,
+    initialSlide: 0,
+    autoplay: true,
+    autoplaySpeed: 5000,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: false
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
+}
 
 function ShowDetail() {
   const { showId } = useParams() 
@@ -68,19 +104,11 @@ function ShowDetail() {
           <div className="showsDetail__actors">
             <Slider { ...setting }>
               {casts?.map(actor => (
-                <div className="showsDetail__actors__card" key={actor.id}>
-                  <div className="showsDetail__actors__card__img">
-                    <img src={actor.profile_path?`https://image.tmdb.org/t/p/original/${actor.profile_path}`:unkownActor} alt={actor.original_name} /> 
-                  </div>
-                  <div className="showsDetail__actors__card__infor">
-                    <h5>{actor.original_name}</h5>
-                    <span>{actor.character}</span>
-                  </div>
-                </div>
+                <ActorCard key={actor.id} actor={actor} />
               ))}
             </Slider>
           </div>
-          <Title seeAll='hello' linkTo='/'>Seasons</Title>
+          <Title>Seasons</Title>
           <div className="showsDetail__seasons">
                 {detail.seasons?.map(season => (
                   <div className="showsDetail__seasons__card">
@@ -90,7 +118,7 @@ function ShowDetail() {
                     <div className="showsDetail__seasons__card__infor">
                       <h3>{season.name}</h3>
                       <span>{season.air_date} | {season.episode_count} Episodes</span>
-                      <p>{season.overview?.substring(0,100)} ...</p>
+                      <p>{season.overview?.substring(0,100)}...</p>
                     </div>
                   </div>
                 ))}

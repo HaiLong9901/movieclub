@@ -1,21 +1,20 @@
-import React, { useRef } from 'react'
-import './MovieCard.scss'
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { setPostStatus } from '../../features/movies/moviesSlice'
 import { useDispatch, useSelector } from 'react-redux'
-import { useEffect } from 'react'
+import './MovieCard.scss'
 
-function MovieCard(props) {
 
-  const { movie } = props
+function MovieCard({movie}) {
+
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const status = useSelector(state => state.movies)
+  const state = useSelector(state => state.movies)
 
   return ( 
     <div className="movieCard" onClick={() => {
       navigate(`/movies/${movie.id}`)
-      dispatch(setPostStatus(status))
+      dispatch(setPostStatus(state))
     }}>
       <div className="movieCard__inner">
         <div className="movieCard__top">

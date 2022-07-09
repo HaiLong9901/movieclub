@@ -17,7 +17,7 @@ function ShowPage() {
   }
 
   useEffect(() => {
-    console.log('status: ', status)
+    window.scrollTo(0,0)
     if(status === 'idle') {
         dispatch(fetchAsyncShowList(page))
     }
