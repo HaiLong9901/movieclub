@@ -1,39 +1,43 @@
 @import '../../common/colors.scss';
 
-.header {
-    height: 5rem;
-    background-color: $yellow-cl;
-    display: flex;
-    justify-content: space-between;
-    padding: 0 5rem;
-    // position: fixed;
-    // top: 0;
-    // width: 100%;
-    // gap: 15rem;
+// .header {
+//     height: 5rem;
+//     background-color: $yellow-cl;
+//     display: flex;
+//     justify-content: space-between;
+//     padding: 0 5rem;
+//     // position: fixed;
+//     // top: 0;
+//     // width: 100%;
+//     // gap: 15rem;
 
-    &__logo{
-        margin: 0;
-        font-size: 2rem;
-        line-height: 5rem;
-        color: $blue-cl;
-        text-decoration: none;
-        cursor: pointer;
+//     &__logo{
+//         margin: 0;
+//         font-size: 2rem;
+//         line-height: 5rem;
+//         color: $blue-cl;
+//         text-decoration: none;
+//         cursor: pointer;
 
-        &__icon{
-            font-size: 3rem;
-            transform: translateY(.5rem);
-            color: $purple-cl;
-        }
-    }
-    &__menu{
-        display: flex;
-        gap: 2rem;
+//         &__icon{
+//             font-size: 3rem;
+//             transform: translateY(.5rem);
+//             color: $purple-cl;
+//         }
+//     }
+//     &__menu{
+//         display: flex;
+//         gap: 2rem;
 
-        &__item{
-            font-size: 1.3rem;
-            color: $purple-cl;
-            line-height: 5rem;
-            text-decoration: none;
-        }
-    }
+//         &__item{
+//             font-size: 1.3rem;
+//             color: $purple-cl;
+//             line-height: 5rem;
+//             text-decoration: none;
+//         }
+//     }
+//}
+
+.MuiList-root {
+    background: $blue-cl;
 }

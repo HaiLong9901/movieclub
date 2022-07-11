@@ -1,28 +1,5 @@
 @import '../../common/colors.scss';
 
 .home{
-    // padding: 2rem 5rem;
-
-    &__banner{
-        font-size: 2.2rem;
-        color: $white-cl;
-        font-style: italic;
-        text-decoration: solid;
-    }
-
-    &__title{
-        width: 100%;
-        background: $purple-cl;
-        height: 5rem;
-        border-radius: .5rem;
-        padding: 0 1rem;
-        margin-bottom: 2rem;
-
-        h3{
-            font-size: 2rem;
-            margin: 1 .5rem;
-            line-height: 5rem;
-            color: $white-cl;
-        }
-    }
+    padding: 0;
 }

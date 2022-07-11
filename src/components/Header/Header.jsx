@@ -50,19 +50,7 @@ import AdbIcon from '@mui/icons-material/Adb'
 import MenuIcon  from '@mui/icons-material/Menu'
 import SlideshowIcon from '@mui/icons-material/Slideshow';
 import { useNavigate } from 'react-router-dom'
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#034C65'
-    },
-    secondary: {
-      main: '#000'
-    }
-  }
-})
-
+import './Header.scss'
 
 const pages = [{
   page: 'Home',
@@ -96,27 +84,27 @@ const Header = () => {
   };
 
   return (
-    <ThemeProvider theme={theme}>
     <AppBar position="static">
       <Container maxWidth="xl" sx={{
-        bgcolor: '#FCB677'
+        bgcolor: 'primary.yellowColor'
       }}>
         <Toolbar disableGutters>
-          <SlideshowIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: .5, ml: 5, fontSize: '2rem' }} />
+          <SlideshowIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: .5, ml: 5, fontSize: '2rem', color: 'primary.purpleColor' }} />
           <Typography
             variant="h6"
             noWrap
             component="a"
-            href="/"
+            onClick={() => navigate('/')}
             sx={{
               display: { xs: 'none', md: 'flex' },
               fontSize: '1.8rem',
               fontFamily: 'roboto',
               fontWeight: 700,
               letterSpacing: '.1rem',
-              color: 'primary.main',
+              color: 'primary.blueColor',
               textDecoration: 'none',
-              mr: '5rem'
+              mr: '5rem',
+              cursor: 'pointer'
             }}
           >
             MovieClub
@@ -129,9 +117,11 @@ const Header = () => {
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              color="inherit"
+              sx={{
+                color: 'primary.blueColor'
+              }}
             >
-              <MenuIcon />
+            <MenuIcon />
             </IconButton>
             <Menu
               id="menu-appbar"
@@ -155,36 +145,38 @@ const Header = () => {
                 <MenuItem key={page.page} onClick={() => {
                   handleCloseNavMenu()
                   navigate(page.link)
+                }} sx={{
                 }}>
                   <Typography textAlign="center" sx={{
-                    fontSize: '.8rem',
-                    color: '#fff'
+                    fontSize: '1rem',
+                    color: 'primary.yellowColor'
                   }}>{page.page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-          <SlideshowIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1, fontSize: '2rem' }} />
+          <SlideshowIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1, fontSize: '1.5rem', color: 'primary.purpleColor' }} />
           <Typography
             variant="h5"
             noWrap
             component="a"
-            href=""
+            onClick={() => navigate('/')}
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
-              fontFamily: 'monospace',
+              fontFamily: 'roboto',
               fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
+              letterSpacing: '.1rem',
+              color: 'primary.blueColor',
               textDecoration: 'none',
-              fontSize: '1.3rem'
+              fontSize: '1.3rem',
+              cursor: 'pointer'
             }}
           >
             MovieClub
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }}}>
             {pages.map((page) => (
               <Button
                 key={page.page}
@@ -231,7 +223,6 @@ const Header = () => {
         </Toolbar>
       </Container>
     </AppBar>
-    </ThemeProvider>
   );
 };
 

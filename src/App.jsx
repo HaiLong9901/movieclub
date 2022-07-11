@@ -8,9 +8,12 @@ import PageNotFound from './components/PageNotFond/PageNotFound'
 import Footer from './components/Footer/Footer'
 import MoviePage from './page/Movie/MoviePage';
 import ShowPage from './page/Show/ShowPage';
+import { ThemeProvider } from '@mui/material/styles'
+import theme from './components/customizeColor';
 
 function App() {
   return (
+    <ThemeProvider theme={theme}>
     <Router>
       <div className="app">
         <Header />
@@ -25,6 +28,7 @@ function App() {
         <Footer />
       </div>
       </Router>
+      </ThemeProvider>
   );
 }
 

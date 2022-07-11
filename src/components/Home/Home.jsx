@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import './Home.scss'
 import MovieListing from '../NowPlayingMovie/NowPlayingMovie'
-import { useDispatch, useSelector } from 'react-redux'
-import { fetchAsyncMovies, fetchAsyncPopularMovies, fetchAsyncPopularShows, fetchAsyncTopRateMovies, fetchAsyncUpComingMovies} from '../../features/movies/moviesSlice'
+import { useDispatch } from 'react-redux'
+import { fetchAsyncTopRateMovies} from '../../features/movies/moviesSlice'
 import Title from '../Title/Title'
-import Slider from 'react-slick'
-import { setting } from '../../common/setting'
 import TopRatedMovies from '../TopRatedMovies/TopRatedMovies'
 import PopularMovies from '../PopularMovies/PopularMovies'
 import UpComingMovies from '../UpComingMovies/UpComingMovies'
+import { Container } from '@mui/material'
 
 function Home() {
   const dispatch = useDispatch()
@@ -18,7 +17,9 @@ function Home() {
   }, [dispatch])
 
   return (
-    <div className="home">
+    <Container maxWidth='xl' sx={{
+      p: { xs: 0, xl: 0}
+    }} className="home">
       <UpComingMovies />
       <Title>Popular</Title>
       <PopularMovies />
@@ -26,7 +27,7 @@ function Home() {
       <TopRatedMovies />
       <Title>Now playing</Title>
       <MovieListing />
-    </div>
+    </Container>
   )
 }
 
