@@ -1,13 +1,21 @@
 import React from 'react'
-import { LinearProgress, CircularProgress } from '@mui/material'
+import { Box, CircularProgress } from '@mui/material'
 import './Loading.scss'
+import { FaBoxTissue } from 'react-icons/fa'
 
 function Loading() {
   return (
-    <div className="Loading">
-        <LinearProgress className='linearLoading' />
-        <CircularProgress className='circularLoading' />
-    </div>
+    <Box className="Loading" sx={{
+      width: '100vw',
+      height: '80vh',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center'
+    }}>
+        <CircularProgress className='circularLoading' sx={{
+          color: 'primary.yellowColor'
+        }} />
+    </Box>
   )
 }
 

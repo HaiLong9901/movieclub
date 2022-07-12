@@ -1,8 +1,8 @@
 import React ,{ useState, useEffect } from 'react'
-import Loading from '../../components/Loading/Loading'
-import { useGetMovieListsQuery, useGetSearchQuery } from '../../features/api/apiSlice'
+import Loading from '../../../components/Loading/Loading'
+import { useGetMovieListsQuery, useGetSearchQuery } from '../../../features/api/apiSlice'
 import { Pagination, Stack } from '@mui/material'
-import MovieListing from '../../components/MovieListing/MovieListing'
+import MovieListing from '../../../components/MovieListing/MovieListing'
 import './MoviePage.scss'
 
 
@@ -30,7 +30,6 @@ function MoviePage() {
   } else if (isSuccess) {
     content = (
         <MovieListing movies={list} type='movie' />
-        // <p>Hello</p>
     )
   } else if (isError) {
     content = <p>{error.toString()}</p>
