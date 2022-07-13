@@ -3,12 +3,8 @@
 
 .title{
     width: 100%;
-    padding: 0 5rem;
     display: flex;
     justify-content: space-between;
-    @include mobile{
-        padding: 0 1rem;
-    }
     box-sizing: border-box;
     margin: 2rem 0;
         h3{

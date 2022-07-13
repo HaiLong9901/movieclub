@@ -47,7 +47,7 @@ function UpComingMovies() {
                   alignItems: 'center',
                   justifyContent: { xs: 'space-around', lg: 'space-between'},
                   boxSizing: 'border-box',
-                  background: `linear-gradient(0, rgba(3,76,101,0.8), rgba(225,225,225,0.2)), url("https://image.tmdb.org/t/p/w500/${movie.backdrop_path}") no-repeat fixed center`,
+                  background: `linear-gradient(0, rgba(3,76,101,0.8), rgba(225,225,225,0.2)), url("https://image.tmdb.org/t/p/original/${movie.backdrop_path}") no-repeat fixed center`,
                   backgroundSize: 'cover'
                 }}>
                   <Box sx={{
