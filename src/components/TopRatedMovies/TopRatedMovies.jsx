@@ -3,6 +3,8 @@ import './TopRatedMovies.scss'
 import MovieCard from '../MovieCard/MovieCard'
 import { useGetTopRatedMoviesQuery } from '../../features/api/apiSlice'
 import Loading from '../Loading/Loading'
+import { Box } from '@mui/material'
+import Title from '../Title/Title'
 
 function TopRatedMovies() {
   
@@ -36,9 +38,16 @@ function TopRatedMovies() {
     content = <p>{error.toString()}</p>
   }
   return (
-    <div className="topRatedMovies">
+    <Box sx={{
+      width: '100%',
+      px: { xs: '0.5rem', sm: '1rem', md: '2rem', lg: '5rem'},
+      boxSizing: 'border-box'
+    }} className="topRatedMovies">
+      <Title>Top rated</Title>
+      <div className="topRatedMovies__container">
         {content}
-    </div>
+      </div>
+    </Box>
   )
 }
 

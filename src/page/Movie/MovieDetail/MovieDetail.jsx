@@ -45,8 +45,8 @@ const setting = {
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1
+          slidesToShow: 2,
+          slidesToScroll: 2
         }
       }
     ]
@@ -183,7 +183,8 @@ function MovieDetail() {
               ))}
             </Slider>
           </div>
-          <Title>Reviews</Title>
+
+        <Title>Reviews</Title>
           <div className="movieDetail__reviews">
             <Slider {...settingForReview}>
                 {reviews?.map(review => (
@@ -206,12 +207,13 @@ function MovieDetail() {
                 ))}
             </Slider>
           </div>
+
           <Title>Similar movies</Title>
           <div className="movieDetail__similarMovies">
-            <Grid container spacing={2}>
+            <Grid container spacing={{xs: 2, md: 3}} columns={{xs: 4, sm: 8, md: 12}}>
               {similar?.map((movie, index) =>{
                 if(index < 6) return  (
-                  <Grid item xs={2} key={movie.id}>
+                  <Grid item xs={2} sm={4} md={2} key={movie.id}>
                     <MovieCard movie={movie} />
                   </Grid>
                 )

@@ -81,7 +81,7 @@ function UpComingMovies() {
                     >Discover</Button>
                   </Box>
                   <Box sx={{
-                    width: '30%',
+                    width: {xs: '50%', md: '30%'},
                     borderRadius: '.5rem',
                     overflow: 'hidden'
                   }}>

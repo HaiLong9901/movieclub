@@ -1,9 +1,11 @@
 import React from 'react'
-import './NowPlayingMovie.scss'
+import { Box } from '@mui/material'
 import MovieCard from '../MovieCard/MovieCard'
 import { Grid } from '@mui/material'
 import { useGetMoviesQuery } from '../../features/api/apiSlice'
 import Loading from '../Loading/Loading'
+import Title from '../Title/Title'
+import './NowPlayingMovie.scss'
 
 function MovieListing() {
 
@@ -37,11 +39,17 @@ function MovieListing() {
 
 
   return (
-    <div className="nowPlayingMovie">
+    <Box sx={{
+      width: '100%',
+      px: { xs: '0.5rem', sm: '1rem', md: '2rem', lg: '5rem'},
+      boxSizing: 'border-box',
+      mb: '2rem'
+    }} className="nowPlayingMovie">
+      <Title>Now playing</Title>
       <Grid container spacing={3}>
         {content}
       </Grid>
-    </div>
+    </Box>
   )
 }
 

@@ -1,48 +1,3 @@
-// import React, { useState } from 'react'
-// import { Link } from 'react-router-dom'
-// import { Button, Menu, MenuItem } from '@mui/material'
-// import { BiCameraMovie } from 'react-icons/bi'
-// import { useNavigate } from 'react-router-dom'
-// import './Header.scss'
-
-// function Header() {
-//   const navigate = useNavigate()
-//   const [anchorEl, setAnchorEl] = useState(null)
-//   const open = Boolean(anchorEl)
-//   const handleClick = (e) => {
-//     setAnchorEl(e.currentTarget)
-//   }
-//   const handleClose = () => {
-//     console.log('close')
-//     setAnchorEl(null)
-//   }
-//   return (  
-//     <div className="header">
-//       <h2 className="header__logo" onClick={() => navigate('/')}>MovieClub<BiCameraMovie className='header__logo__icon' /></h2>
-//       <div className="header__menu">
-//         <Link to='/' className='header__menu__item'>Home</Link>
-//         <Link to='/movies' className='header__menu__item'>Movie</Link>      
-//         <Link to='/shows' className='header__menu__item'>Shows</Link>      
-//         {/* <Link to='/' className='header__menu__item' >About us</Link>
-//         <Link to='/' className='header__menu__item' >Contact</Link> */}
-
-//         <Menu
-//         id='basic-menu'
-//         anchorEl={anchorEl}
-//         open={open}
-//         onClose={handleClose}
-//         MenuListProps={{
-//           'aria-labelledby': 'basic-button'
-//         }}
-//         >
-//           <MenuItem onClose={handleClose}>mot</MenuItem>
-//           <MenuItem onClose={handleClose}>hai</MenuItem>
-//           <MenuItem onClose={handleClose}>ba</MenuItem>
-//         </Menu>
-//       </div>
-//     </div>
-//   )
-// }
 
 import React, { useState } from 'react';
 import { AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip, MenuItem} from '@mui/material';
@@ -50,6 +5,7 @@ import AdbIcon from '@mui/icons-material/Adb'
 import MenuIcon  from '@mui/icons-material/Menu'
 import SlideshowIcon from '@mui/icons-material/Slideshow';
 import { useNavigate } from 'react-router-dom'
+import unknown from '../../images/unknown.jfif'
 import './Header.scss'
 
 const pages = [{
@@ -61,7 +17,6 @@ link: '/movies'}, {
   link:'/shows'
 }];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
-// const link = ['/', '/movies', '/shows']
 
 const Header = () => {
   const navigate = useNavigate()
@@ -191,10 +146,10 @@ const Header = () => {
             ))}
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
+          <Box sx={{ flexGrow: 0, mr: { xs: '1rem', md: '2rem'} }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Remy Sharp" src={unknown} />
               </IconButton>
             </Tooltip>
             <Menu
@@ -213,11 +168,21 @@ const Header = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
+              {/* {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                  <Typography sx={{
+                    color: 'white'
+                  }} textAlign="center">{setting}</Typography>
                 </MenuItem>
-              ))}
+              ))} */}
+              <MenuItem onClick={() => {
+                handleCloseUserMenu()
+                navigate('/user/login')
+              }}>
+                <Typography sx={{
+                  color: 'white'
+                }} textAlign='center'>Login</Typography>
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>

@@ -2,11 +2,14 @@
 @import '../../common/responsive.scss';
 
 .topRatedMovies{
-    display: flex;
-    padding: 0 5rem;
-    @include mobile{
+
+    &__container {
+        display: flex;
+        @include mobile{
         padding: 0 1rem;
+        }
     }
+    
 
     .topRatedMovies__movie{
         width: 20%;

@@ -1,7 +1,7 @@
 import React ,{ useState, useEffect } from 'react'
 import Loading from '../../../components/Loading/Loading'
 import { useGetMovieListsQuery, useGetSearchQuery } from '../../../features/api/apiSlice'
-import { Pagination, Stack } from '@mui/material'
+import { Pagination, Stack, Box } from '@mui/material'
 import MovieListing from '../../../components/MovieListing/MovieListing'
 import './MoviePage.scss'
 
@@ -35,7 +35,12 @@ function MoviePage() {
     content = <p>{error.toString()}</p>
   }
   return (
-    <section className="moviePage">
+    <Box sx={{
+      width: '100%',
+      px: { xs: '0.5rem', sm: '1rem', md: '2rem', lg: '5rem'},
+      py: { xs: '1rem', md: '2rem'},
+      boxSizing: 'border-box',
+    }} className="moviePage">
 
         
         {content}
@@ -43,7 +48,7 @@ function MoviePage() {
         <Stack className='moviePage__pavigation' spacing={2}>
             <Pagination count={10} page={page} onChange={handleChange2} />
         </Stack>
-    </section>
+    </Box>
   )
 }
 

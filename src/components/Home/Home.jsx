@@ -21,11 +21,8 @@ function Home() {
       p: { xs: 0, xl: 0}
     }} className="home">
       <UpComingMovies />
-      <Title>Popular</Title>
       <PopularMovies />
-      <Title>Top rated</Title>
       <TopRatedMovies />
-      <Title>Now playing</Title>
       <MovieListing />
     </Container>
   )
