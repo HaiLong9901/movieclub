@@ -9,6 +9,7 @@ import Footer from './components/Footer/Footer'
 import MoviePage from './page/Movie/MoviePage/MoviePage';
 import LoginPage from './page/SignInPage/LoginPage';
 import ShowPage from './page/Show/ShowPage';
+import SignUpPage from './page/SignUpPage/SignUpPage';
 import { ThemeProvider } from '@mui/material/styles'
 import theme from './components/customizeColor';
 
@@ -25,6 +26,7 @@ function App() {
             <Route path='/movies/:imdbID' element={<MovieDetail />} />
             <Route path='/shows/:showId' element={<ShowDetail />} />
             <Route path='/user/login' element={<LoginPage />} />
+            <Route path='/user/signup' element={<SignUpPage />} />
             <Route path='*' element={<PageNotFound />} />
           </Routes>
         <Footer />

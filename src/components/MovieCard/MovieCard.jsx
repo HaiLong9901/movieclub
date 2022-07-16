@@ -18,7 +18,7 @@ function MovieCard({movie}) {
     }}>
       <div className="movieCard__inner">
         <div className="movieCard__top">
-          <img src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} alt={movie.title} />
+          <img src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} loading='lazy' alt={movie.title} />
         </div>
         <div className="movieCard__bottom">
           <h4>{movie.title}</h4>
