@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchAsyncDetailMovie, getDetailMovie } from '../../../features/movies/moviesSlice'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { AiFillStar, AiOutlineYoutube } from 'react-icons/ai'
 import { FaQuoteRight } from 'react-icons/fa'
 import { Button, Avatar, Grid, Chip, Container, Box, Typography} from '@mui/material'
@@ -60,6 +60,7 @@ const actions = [
 ];
 
 function MovieDetail() {
+  const navigate = useNavigate()
   const param = useParams()
   const movieId = param.imdbID
   const postStatus = useSelector(state => state.movies.status)
@@ -141,7 +142,8 @@ function MovieDetail() {
             <Button sx={{
               width: {lg: '30%', xs: '50%'},
               bgcolor: 'primary.blueColor'
-            }} variant='contained'>Trailer</Button>
+            }} variant='contained'
+            onClick={() => navigate(`/movies/${detail.id}/watch/${detail.imdb_id}`)}>Watch movie</Button>
           </Box>
           <Box sx={{ 
             height: 320, 

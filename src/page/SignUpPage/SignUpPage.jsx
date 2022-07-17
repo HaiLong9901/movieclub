@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import * as yup from 'yup'
 import { useFormik } from 'formik'
-import { Button, TextField, Box, Container, Typography } from '@mui/material'
+import { Button, TextField, Box, Container, Typography, Alert, AlertTitle } from '@mui/material'
+import { useAuth } from '../../contexts/AuthContexts'
+import { useNavigate } from 'react-router-dom'
 
 const validationSchema = yup.object({
     email: yup.string('Enter your email')
@@ -11,11 +13,18 @@ const validationSchema = yup.object({
         .min(8, 'Password should be of minimum 8 characters length')
         .required('Password is required'),
     confirm: yup.string('Confirm your password')
-        .min(8, 'Your password is not confirmed')
-        .required('You must confirm your password')
+        .min(8, 'Enter a valid password')
+        .required('Password need to be confirmed')
 })
 
+
 function SignUpPage() {
+    const navigate = useNavigate()
+    const [error, setError] = useState('')
+    const [loading, setLoading] = useState(false)
+
+    const { signup } = useAuth()
+
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -23,37 +32,56 @@ function SignUpPage() {
             confirm: ''
         },
         validationSchema,
-        onSubmit: values => {
-            alert(JSON.stringify(values, null, 2))
+        onSubmit: async ({email, password, confirm}) => {
+            if(password !== confirm) {
+                return setError('Password is not match')
+            }
+    
+            try {
+                setError('')
+                setLoading(true)
+                await signup(email, password)
+                navigate('/')
+                
+            } catch (error) {
+                setError('Failed to create an account')
+            }
+            setLoading(false)
         }
       })
       return (
         <Container sx={{
+            width: '100vw',
             height: '100vh',
-            px: { xs: '1rem', md: '2rem', lg: '5rem'},
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center'
+            
         }} className='loginPage'>
             <Box sx={{
-                width: { xs: '90%', md: '70%', lg: '50%'},
-                height :'50%',
-                bgcolor: 'white',
+                width: {xs: '90%', md: '70%', lg: '50%'},
+                height: '60%',
                 p: '2rem',
+                bgcolor: 'white',
                 borderRadius: '.5rem'
-            }}>
+            }} >
                 <form style={{
-                    display: 'flex',
                     width: '100%',
                     height: '100%',
+                    display: 'flex',
                     flexDirection: 'column',
-                    justifyContent: 'space-evenly'
+                    justifyContent: 'space-evenly',
                 }} onSubmit={formik.handleSubmit}>
                     <Typography sx={{
-                        fontSize: {xs: '2rem', md:'2.5rem', lg: '3rem'},
+                        fontSize: { xs: '2.5rem', md: '3rem'},
+                        textAlign: 'center',
                         fontWeight: 500,
-                        textAlign: 'center'
-                    }} variant='h1' component='h3' >Sign Up</Typography>
+                        color: 'primary.blueColor'
+                    }}>Signup</Typography>
+                    { error && <Alert severity="error">
+                        <AlertTitle>Error</AlertTitle>
+                        {error}
+                    </Alert>}
                     <TextField fullWidth
                     id='email'
                     name='email'
@@ -62,7 +90,7 @@ function SignUpPage() {
                     onChange={formik.handleChange}
                     error={formik.touched.email && Boolean(formik.errors.email)}
                     helperText={formik.touched.email && formik.errors.email}
-                     />
+                    />
                     <TextField fullWidth
                     id='password'
                     name='password'
@@ -72,7 +100,7 @@ function SignUpPage() {
                     onChange={formik.handleChange}
                     error={formik.touched.password && Boolean(formik.errors.password)}
                     helperText={formik.touched.password && formik.errors.password}
-                     />
+                    />
                     <TextField fullWidth
                     id='confirm'
                     name='confirm'
@@ -82,8 +110,8 @@ function SignUpPage() {
                     onChange={formik.handleChange}
                     error={formik.touched.confirm && Boolean(formik.errors.confirm)}
                     helperText={formik.touched.confirm && formik.errors.confirm}
-                     />
-                    <Button color='primary' variant='contained' fullWidth type='submit'>Submit</Button>
+                    />
+                    <Button disabled={loading} color='primary' variant='contained' fullWidth type='submit'>Submit</Button>
                 </form>
             </Box>
         </Container>

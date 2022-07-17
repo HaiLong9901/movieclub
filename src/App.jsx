@@ -12,10 +12,13 @@ import ShowPage from './page/Show/ShowPage';
 import SignUpPage from './page/SignUpPage/SignUpPage';
 import { ThemeProvider } from '@mui/material/styles'
 import theme from './components/customizeColor';
+import MovieWatch from './page/Movie/MovieWatch/MovieWatch';
+import { AuthProvider } from './contexts/AuthContexts'
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
+    <AuthProvider>
     <Router>
       <div className="app">
         <Header />
@@ -24,6 +27,7 @@ function App() {
             <Route path='/movies' element={<MoviePage />} />
             <Route path='/shows' element={<ShowPage />} />
             <Route path='/movies/:imdbID' element={<MovieDetail />} />
+            <Route path='/movies/:imdbID/watch/:imdbId' element={<MovieWatch />} />
             <Route path='/shows/:showId' element={<ShowDetail />} />
             <Route path='/user/login' element={<LoginPage />} />
             <Route path='/user/signup' element={<SignUpPage />} />
@@ -32,6 +36,7 @@ function App() {
         <Footer />
       </div>
       </Router>
+      </AuthProvider>
       </ThemeProvider>
   );
 }
