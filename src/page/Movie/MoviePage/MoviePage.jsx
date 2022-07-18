@@ -46,7 +46,7 @@ function MoviePage() {
         {content}
 
         <Stack className='moviePage__pavigation' spacing={2}>
-            <Pagination count={10} page={page} onChange={handleChange2} />
+            <Pagination count={34361} page={page} onChange={handleChange2} />
         </Stack>
     </Box>
   )
