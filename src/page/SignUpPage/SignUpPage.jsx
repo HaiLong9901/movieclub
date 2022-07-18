@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import * as yup from 'yup'
 import { useFormik } from 'formik'
 import { Button, TextField, Box, Container, Typography, Alert, AlertTitle } from '@mui/material'
-// import { useAuth } from '../../contexts/AuthContexts'
-// import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../../contexts/AuthContexts'
+import { useNavigate } from 'react-router-dom'
 
 const validationSchema = yup.object({
     email: yup.string('Enter your email')
@@ -19,11 +19,11 @@ const validationSchema = yup.object({
 
 
 function SignUpPage() {
-    // const navigate = useNavigate()
-    // const [error, setError] = useState('')
+    const navigate = useNavigate()
+    const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
 
-    // const { signup } = useAuth()
+    const { signup } = useAuth()
 
     const formik = useFormik({
         initialValues: {
@@ -33,20 +33,20 @@ function SignUpPage() {
         },
         validationSchema,
         onSubmit: async ({email, password, confirm}) => {
-            // if(password !== confirm) {
-            //     return setError('Password is not match')
-            // }
+            if(password !== confirm) {
+                return setError('Password is not match')
+            }
     
-            // try {
-            //     setError('')
-            //     setLoading(true)
-            //     await signup(email, password)
-            //     navigate('/')
+            try {
+                setError('')
+                setLoading(true)
+                await signup(email, password)
+                navigate('/')
                 
-            // } catch (error) {
-            //     setError('Failed to create an account')
-            // }
-            // setLoading(false)
+            } catch (error) {
+                setError('Failed to create an account')
+            }
+            setLoading(false)
         }
       })
       return (
@@ -78,10 +78,10 @@ function SignUpPage() {
                         fontWeight: 500,
                         color: 'primary.blueColor'
                     }}>Signup</Typography>
-                    {/* { error && <Alert severity="error">
+                    { error && <Alert severity="error">
                         <AlertTitle>Error</AlertTitle>
                         {error}
-                    </Alert>} */}
+                    </Alert>}
                     <TextField fullWidth
                     id='email'
                     name='email'
