@@ -24,7 +24,7 @@ export const apiSlice = createApi({
         }),
 
         getDetailMovie: builder.query({
-            query: (movieId) => `3/movie/${movieId}/reviews?api_key=${api_key}`
+            query: (movieId) => `3/movie/${movieId}?api_key=${api_key}`
         }),
 
         getActors: builder.query({
@@ -45,9 +45,12 @@ export const apiSlice = createApi({
         getSearch: builder.query({
             query: () => `3/search/multi?api_key=${api_key}&language=en-US&query=men&page=1&include_adult=false`
 
+        }),
+        getRecommendMovies: builder.query({
+            query: (movieId) => `3/movie/${movieId}/recommendations?api_key=${api_key}&language=en-US&page=1`
         })
     })
 })
 
 export const { useGetMoviesQuery, useGetPopularMoviesOrShowsQuery, useGetUpComingMoviesQuery, useGetTopRatedMoviesQuery,
-useGetDetailMovieQuery, useGetActorsQuery, useGetReviewsQuery, useGetSimilarMoviesQuery, useGetMovieListsQuery, useGetSearchQuery} = apiSlice
+useGetDetailMovieQuery, useGetActorsQuery, useGetReviewsQuery, useGetSimilarMoviesQuery, useGetMovieListsQuery, useGetSearchQuery, useGetRecommendMoviesQuery} = apiSlice
